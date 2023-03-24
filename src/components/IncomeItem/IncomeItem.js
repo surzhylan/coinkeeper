@@ -1,4 +1,3 @@
-import {IncomeTransaction} from "../../data/models/IncomeTransaction";
 import {useState} from "react";
 import EditIncomeSourceModal from "./EditIncomeSourceModal";
 

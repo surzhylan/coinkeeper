@@ -15,14 +15,16 @@ const IncomeList = ({
     const [isCreateMode, setCreateMode] = useState(false)
 
     function getTotalActualIncome() {
-        let total = incomeTransactions.reduce(
-            (acc, obj) => acc + obj.amount, 0,)
+        let total = 0
+        for (let i in incomeTransactions) {
+            total += Number(i.amount)
+        }
         return isNaN(total) ? 0 : total
     }
 
     function getTotalPlannedIncome() {
         let total = 0
-        for (let i of incomeSourceList) {
+        for (let i in incomeSourceList) {
             total += Number(i.plannedIncome)
         }
         return isNaN(total) ? 0 : total

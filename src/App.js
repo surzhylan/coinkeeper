@@ -4,6 +4,8 @@ import {User} from "./data/models/User";
 import AppHeader from "./components/AppHeader/AppHeader";
 import {IncomeSource} from "./data/models/IncomeSource";
 import {Account} from "./data/models/Account";
+import AccountItem from "./components/AccountItem/AccountItem";
+import AccountList from "./components/AccountList/AccountList";
 
 function App() {
     const savedUser = localStorage.getItem('user')
@@ -42,7 +44,6 @@ function App() {
                 ...user,
                 incomeSourceList: user.incomeSourceList.filter(i => i.id !== deletedId)
             };
-            console.log(updatedUser)
             setUser(updatedUser)
         }
     }
@@ -50,15 +51,42 @@ function App() {
     //Account actions
     function addAccount(title, balance) {
         if (title && balance) {
-            let newUser = user.accountList.push(new Account(title, balance))
-            setUser(newUser)
+            const updatedUser = {
+                ...user,
+                accountList: [...user.accountList || [], new Account(title, balance)]
+            };
+            setUser(updatedUser);
+        }
+    }
+
+    function editAccount(changedAccount) {
+        if (changedAccount) {
+            let index = user.accountList.findIndex(i => i.id === changedAccount.id)
+            let newList = [...user.accountList]
+            newList[index] = changedAccount
+
+            const updatedUser = {
+                ...user,
+                accountList: newList
+            };
+            setUser(updatedUser)
+        }
+    }
+
+    function deleteAccount(deletedId) {
+        if (deletedId) {
+            const updatedUser = {
+                ...user,
+                accountList: user.accountList.filter(i => i.id !== deletedId)
+            };
+            setUser(updatedUser)
         }
     }
 
     function getAllIncomeTransactions() {
         let transactions = []
-        for (let account of user.accountList) {
-            transactions.push(...account.incomeTransactions)
+        for (let a in user.accountList || []) {
+            transactions.push(...a.incomeTransactions || [])
         }
         return transactions
     }
@@ -72,8 +100,8 @@ function App() {
     return (
         <div>
             <button onClick={event => {
-                addIncome("Scholarship", 36000)
-            }}>Add Income
+                addAccount("Cash", 36000)
+            }}>Add Account
             </button>
 
             <AppHeader user={user}/>
@@ -82,9 +110,13 @@ function App() {
                     {/*Login and Registration*/}
                 </div>
                 : <div>
-                    <IncomeList incomeSourceList={user.incomeSourceList} addIncome={addIncome}
+                    <IncomeList incomeSourceList={user.incomeSourceList || []} addIncome={addIncome}
                                 deleteIncomeSource={deleteIncomeSource}
                                 editIncomeSource={editIncomeSource} incomeTransactions={getAllIncomeTransactions()}/>
+                    <AccountList accountList={user.accountList || []} addAccount={addAccount}
+                                 deleteAccount={deleteAccount}
+                                 editAccount={editAccount}/>
+
                 </div>}
         </div>)
 }
