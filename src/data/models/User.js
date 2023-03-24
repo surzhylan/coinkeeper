@@ -3,10 +3,11 @@ import {IncomeSource} from "./IncomeSource";
 import {Account} from "./Account";
 
 export class User {
+    #password: string
+
     name: string
     email: string
-    private password: string
-    incomeList: Array<IncomeSource>
+    incomeSourceList: Array<IncomeSource>
     accountList: Array<Account>
 
     constructor(email, name, password) {
@@ -14,10 +15,12 @@ export class User {
         this.email = email
         this.name = name
         this.password = password
+        this.accountList = []
+        this.incomeSourceList = []
     }
 
     addIncome(income: IncomeSource) {
-        this.incomeList.push(income)
+        this.incomeSourceList.push(income)
     }
 
     addAccount(account: Account) {
@@ -25,7 +28,7 @@ export class User {
     }
 
     deleteIncome(incomeId: string) {
-        return this.incomeList.find(e => e.id === incomeId)
+        return this.incomeSourceList.find(e => e.id === incomeId)
     }
 
     deleteAccount(accountId: string) {

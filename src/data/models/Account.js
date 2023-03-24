@@ -1,8 +1,3 @@
-/**
- @param transactionHistory {Array[Transaction]}
- @param title {string}
- @param balance {number}
- */
 import {v4 as uuidv4} from "uuid";
 import {OutcomeTransaction} from "./OutcomeTransaction";
 import {IncomeTransaction} from "./IncomeTransaction";
@@ -12,8 +7,8 @@ import SpendingType from "./SpendingType";
 //Todo: Add getStatistic()
 export class Account {
     id: string
-    private incomeTransactions: Array[IncomeTransaction] = []
-    private outcomeTransactions: Array[OutcomeTransaction] = []
+    incomeTransactions: Array[IncomeTransaction] = []
+    outcomeTransactions: Array[OutcomeTransaction] = []
 
     title: String
     balance: Number
@@ -22,6 +17,8 @@ export class Account {
         this.id = uuidv4()
         this.title = title
         this.balance = balance
+        this.incomeTransactions = []
+        this.outcomeTransactions = []
     }
 
     getTotalIncome() {
@@ -40,9 +37,9 @@ export class Account {
         return total
     }
 
-    replenish(amount: number, source: IncomeSource) {
+    replenish(amount: number, source: IncomeSource, comment: string) {
         this.balance += amount
-        this.incomeTransactions.push(new IncomeTransaction(source, amount))
+        this.incomeTransactions.push(new IncomeTransaction(source, amount, comment))
     }
 
     withdraw(amount: number, spendingType: SpendingType) {
