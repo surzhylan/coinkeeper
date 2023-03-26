@@ -1,6 +1,6 @@
 import {useState} from "react";
 
-const EditAccountModal = ({active, setActive, editAccount, account, deleteAccount}) => {
+const EditAccountModal = ({setActive, editAccount, account, deleteAccount}) => {
     const [titleInput, setTitleInput] = useState(account.title);
     const [balance, setBalance] = useState(account.balance);
     const handleSubmit = (e) => {
@@ -28,7 +28,7 @@ const EditAccountModal = ({active, setActive, editAccount, account, deleteAccoun
         cleanUserInput();
     }
     return (
-        <form hidden={!active}>
+        <form>
             <button onClick={handleDelete}>DELETE</button>
             <input type={"text"} value={titleInput} onChange={e => setTitleInput(e.currentTarget.value)}
                    placeholder="Where do you keep your money?"/>

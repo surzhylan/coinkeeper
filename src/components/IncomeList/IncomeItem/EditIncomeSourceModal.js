@@ -1,5 +1,4 @@
 import {useState} from "react";
-import {IncomeSource} from "../../data/models/IncomeSource";
 
 const EditIncomeSourceModal = ({active, setActive, editIncomeSource, incomeSource, deleteIncomeSource}) => {
     const [titleInput, setTitleInput] = useState(incomeSource.title);

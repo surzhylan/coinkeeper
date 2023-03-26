@@ -1,25 +1,28 @@
-import {useCallback, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import IncomeList from "./components/IncomeList/IncomeList";
-import {User} from "./data/models/User";
 import AppHeader from "./components/AppHeader/AppHeader";
-import {IncomeSource} from "./data/models/IncomeSource";
-import {Account} from "./data/models/Account";
-import AccountItem from "./components/AccountItem/AccountItem";
 import AccountList from "./components/AccountList/AccountList";
+import TransactionType from "./data/models/TransactionType";
+import TransactionList from "./components/TransactionList/TransactionList";
+import {createAccount, createIncomeSource, createTransaction, parseUser} from "./data/models/UtilCreateFuncitons";
 
+//Todo: CreateSpendingType()
+//Todo: Ограничение на траты (на тип траты, на день)
+//Todo: график и
+//Todo: Refactor to Typescript and MVVM
 function App() {
     const savedUser = localStorage.getItem('user')
-    const [user, setUser] = useState(savedUser ? JSON.parse(savedUser) : new User('@', 'name', 'password'));
+    const [user, setUser] = useState(parseUser(JSON.parse(savedUser)));
 
     useEffect(() => {
         localStorage.setItem('user', JSON.stringify(user));
     }, [user])
 
     //IncomeSource actions
-    function addIncome(title, plannedIncome) {
+    function addIncomeSource(title, plannedIncome) {
         const updatedUser = {
             ...user,
-            incomeSourceList: [...user.incomeSourceList, new IncomeSource(title, plannedIncome)]
+            incomeSourceList: [...user.incomeSourceList, createIncomeSource(title, plannedIncome)]
         };
         setUser(updatedUser);
     }
@@ -53,7 +56,7 @@ function App() {
         if (title && balance) {
             const updatedUser = {
                 ...user,
-                accountList: [...user.accountList || [], new Account(title, balance)]
+                accountList: [...user.accountList || [], createAccount(title, balance)]
             };
             setUser(updatedUser);
         }
@@ -83,25 +86,46 @@ function App() {
         }
     }
 
-    function getAllIncomeTransactions() {
-        let transactions = []
-        for (let a in user.accountList || []) {
-            transactions.push(...a.incomeTransactions || [])
+    //Transaction actions
+
+
+    function addTransaction(type: TransactionType, source, destination, amount: number, date: Date) {
+        //Todo: Add error handling (Source or destination don't exist)
+        if (type && source && destination && amount && Date) {
+            const updatedUser = {
+                ...user,
+                transactionList: [...user.transactionList || [], createTransaction(type, source, destination, amount, date)]
+            };
+            setUser(updatedUser);
+            console.log(updatedUser)
         }
-        return transactions
     }
 
-    function createReplenish(amount: number, incomeSource: IncomeSource, comment: string, account: Account) {
-        account.replenish(amount, incomeSource, comment)
-        let date = Date()
+    function deleteTransaction() {
 
+    }
+
+    function editTransaction() {
+
+    }
+
+    function getAllIncomeTransactions() {
+        return user.transactionList.filter(t => TransactionType.Income === t.type)
     }
 
     return (
         <div>
-            <button onClick={event => {
-                addAccount("Cash", 36000)
-            }}>Add Account
+            <button onClick={() => {
+                addIncomeSource('Scholarship', 36000)
+            }}>Add Income Source Example
+            </button>
+            <button onClick={() => {
+                addAccount('Cash', 500)
+            }}>Add Account Example
+            </button>
+            <button onClick={() => {
+                addTransaction(TransactionType.Income, user.incomeSourceList[0], user.accountList[0], 5000, new Date())
+            }}>Add Transaction Example
             </button>
 
             <AppHeader user={user}/>
@@ -110,13 +134,14 @@ function App() {
                     {/*Login and Registration*/}
                 </div>
                 : <div>
-                    <IncomeList incomeSourceList={user.incomeSourceList || []} addIncome={addIncome}
+                    <IncomeList incomeSourceList={user.incomeSourceList} addIncome={addIncomeSource}
                                 deleteIncomeSource={deleteIncomeSource}
                                 editIncomeSource={editIncomeSource} incomeTransactions={getAllIncomeTransactions()}/>
-                    <AccountList accountList={user.accountList || []} addAccount={addAccount}
+                    <AccountList accountList={user.accountList} addAccount={addAccount}
                                  deleteAccount={deleteAccount}
                                  editAccount={editAccount}/>
-
+                    <TransactionList transactions={user.transactionList} addTransaction={addTransaction}
+                                     deleteTransaction={deleteTransaction} editTransaction={editTransaction}/>
                 </div>}
         </div>)
 }

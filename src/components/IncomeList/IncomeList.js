@@ -1,9 +1,6 @@
-import IncomeItem from "../IncomeItem/IncomeItem";
-import {IncomeSource} from "../../data/models/IncomeSource";
-import type {IncomeListInterface} from "./IncomeListInterface";
-import {IncomeTransaction} from "../../data/models/IncomeTransaction";
+import IncomeItem from "./IncomeItem/IncomeItem";
 import {useState} from "react";
-import CreateIncomeSourceModal from "../IncomeItem/CreateIncomeSourceModal";
+import CreateIncomeSourceModal from "./CreateIncomeSourceModal";
 
 const IncomeList = ({
                         incomeSourceList,
@@ -11,23 +8,15 @@ const IncomeList = ({
                         addIncome,
                         deleteIncomeSource,
                         editIncomeSource,
-                    }: IncomeListInterface) => {
+                    }) => {
     const [isCreateMode, setCreateMode] = useState(false)
 
     function getTotalActualIncome() {
-        let total = 0
-        for (let i in incomeTransactions) {
-            total += Number(i.amount)
-        }
-        return isNaN(total) ? 0 : total
+        return incomeTransactions.reduce((acc, obj) => acc + Number(obj.amount), 0)
     }
 
     function getTotalPlannedIncome() {
-        let total = 0
-        for (let i in incomeSourceList) {
-            total += Number(i.plannedIncome)
-        }
-        return isNaN(total) ? 0 : total
+        return incomeSourceList.reduce((acc, obj) => acc + Number(obj.plannedIncome), 0)
     }
 
     let dateStr = new Date().toLocaleString('en-us', {month: 'short', year: 'numeric'})
@@ -52,13 +41,15 @@ const IncomeList = ({
             <div>
                 {incomeSourceList.map(incomeSource => {
                     return (<IncomeItem incomeSource={incomeSource}
-                                        transactions={incomeTransactions.filter(t => t.incomeSource.id === incomeSource.id)}
+                                        transactions={incomeTransactions.filter(t => t.source.id === incomeSource.id)}
                                         editIncomeSource={editIncomeSource} deleteIncomeSource={deleteIncomeSource}/>)
                 })}
-                <button onClick={e => setCreateMode(true)}>Create Income Source</button>
+                <button onClick={() => setCreateMode(true)}>Create Income Source</button>
             </div>
-            <CreateIncomeSourceModal active={isCreateMode} setActive={setCreateMode}
-                                     createIncomeSource={addIncome}/>
+            {(() => {
+                if (isCreateMode === true) return <CreateIncomeSourceModal setActive={setCreateMode}
+                                                                           createIncomeSource={addIncome}/>
+            })()}
         </div>
     )
 }

@@ -1,6 +1,6 @@
 import {useState} from "react";
-import AccountItem from "../AccountItem/AccountItem";
-import CreateAccountModal from "../AccountItem/CreateAccountModal";
+import AccountItem from "./AccountItem/AccountItem";
+import CreateAccountModal from "./CreateAccountModal";
 
 const AccountList = ({
                          accountList,
@@ -11,11 +11,7 @@ const AccountList = ({
     const [isCreateMode, setCreateMode] = useState(false)
 
     function getTotalBalance() {
-        let total = 0
-        for (let i of accountList) {
-            total += Number(i.balance)
-        }
-        return isNaN(total) ? 0 : total
+        return accountList.reduce((acc, obj) => acc + Number(obj.balance), 0)
     }
 
     return (
@@ -25,7 +21,7 @@ const AccountList = ({
                     <h5>Accounts</h5>
                 </div>
                 <div>
-                    <h5>{getTotalBalance()}</h5>
+                    <p>{getTotalBalance()}</p>
                     <p>Total balance</p>
                 </div>
             </div>
@@ -35,10 +31,12 @@ const AccountList = ({
                     return (<AccountItem account={account}
                                          editAccount={editAccount} deleteAccount={deleteAccount}/>)
                 })}
-                <button onClick={e => setCreateMode(true)}>Create Account</button>
+                <button onClick={() => setCreateMode(true)}>Create Account</button>
             </div>
-            <CreateAccountModal active={isCreateMode} setActive={setCreateMode}
-                                createAccount={addAccount}/>
+            {(() => {
+                if (isCreateMode === true) return <CreateAccountModal setActive={setCreateMode}
+                                                                      createAccount={addAccount}/>
+            })()}
         </div>
     )
 }

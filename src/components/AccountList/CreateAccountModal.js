@@ -1,11 +1,11 @@
 import {useState} from "react";
 
-const CreateIncomeSourceModal = ({active, setActive, createIncomeSource}) => {
+const CreateAccountModal = ({setActive, createAccount}) => {
     const [titleInput, setTitleInput] = useState('');
-    const [incomeInput, setIncomeInput] = useState(0);
+    const [balanceInput, setBalanceInput] = useState(0);
     const handleSubmit = (e) => {
         e.preventDefault()
-        createIncomeSource(titleInput, incomeInput)
+        createAccount(titleInput, balanceInput)
         cleanUserInput();
         setActive(false);
     }
@@ -16,18 +16,18 @@ const CreateIncomeSourceModal = ({active, setActive, createIncomeSource}) => {
     }
     const cleanUserInput = () => {
         setTitleInput("");
-        setIncomeInput(0)
+        setBalanceInput(0)
     }
     return (
-        <form hidden={!active}>
+        <form>
             <input type={"text"} onChange={e => setTitleInput(e.currentTarget.value)}
-                   placeholder="What is your income?"/>
-            <input type={"number"} onChange={e => setIncomeInput(e.currentTarget.value)}
-                   placeholder="How much is income per month?"/>
+                   placeholder="Where do you keep your money?"/>
+            <input type={"number"} onChange={e => setBalanceInput(e.currentTarget.value)}
+                   placeholder="How much is there?"/>
             <button onClick={handleSubmit}>ADD</button>
             <button onClick={handleCancel}>CANCEL</button>
         </form>
     )
 }
 
-export default CreateIncomeSourceModal
+export default CreateAccountModal

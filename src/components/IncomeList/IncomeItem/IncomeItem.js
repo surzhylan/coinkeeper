@@ -6,20 +6,25 @@ const IncomeItem = ({incomeSource, transactions, editIncomeSource, deleteIncomeS
 
     function getActualIncome() {
         let total = transactions.reduce(
-            (acc, obj) => acc + obj.amount, 0,)
+            (acc, obj) => acc + obj.amount, 0)
         return isNaN(total) ? 0 : total
     }
 
     return (
         <div key={incomeSource.id} style={{border: "solid 1px red"}}>
-            <div onClick={e => setEditMode(true)}>
+            <div onClick={() => setEditMode(true)}>
                 <header>{incomeSource.title}</header>
                 <p>{incomeSource.plannedIncome}</p>
                 <p>{getActualIncome()}</p>
             </div>
-            <EditIncomeSourceModal active={isEditMode}
-                                   setActive={setEditMode} incomeSource={incomeSource}
-                                   editIncomeSource={editIncomeSource} deleteIncomeSource={deleteIncomeSource}/>
+            {(() => {
+                if (isEditMode === true) return <EditIncomeSourceModal active={isEditMode}
+                                                                       setActive={setEditMode}
+                                                                       incomeSource={incomeSource}
+                                                                       editIncomeSource={editIncomeSource}
+                                                                       deleteIncomeSource={deleteIncomeSource}/>
+            })()}
+
         </div>
     )
 }
