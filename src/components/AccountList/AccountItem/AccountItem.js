@@ -1,14 +1,16 @@
 import {useState} from "react";
 import EditAccountModal from "./EditAccountModal";
 
-const AccountItem = ({account, editAccount, deleteAccount}) => {
+const AccountItem = ({account, editAccount, deleteAccount, accountBalance}) => {
     const [isEditMode, setEditMode] = useState(false)
-
     return (
         <div key={account.id} style={{border: "solid 1px green"}}>
             <div onClick={() => setEditMode(true)}>
-                <header>{account.title}</header>
-                <p>{account.balance}</p>
+                <h5>{account.title}</h5>
+                <div>
+                    <span>Balance</span>
+                    <span>{accountBalance}</span>
+                </div>
             </div>
             {(() => {
                 if (isEditMode === true) return <EditAccountModal

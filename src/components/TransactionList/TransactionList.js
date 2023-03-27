@@ -1,6 +1,7 @@
 import {useState} from "react";
 import TransactionItem from "./TransactionItem/TransactionItem";
-import CreateTransaction from "./CreateTransaction";
+import CreateTransactionModal from "./CreateTransaction";
+import {parseMonthYear} from "../../data/models/UtilCreateFuncitons";
 
 const TransactionList = ({
                              transactions,
@@ -18,38 +19,28 @@ const TransactionList = ({
         return [...new Set(dates)] || []
     }
 
-    function getIncomeByDate(date: Date) {
-        let predicate = (f, s) => {
-            return (f.getFullYear() === s.getFullYear && f.getMonth() === s.getMonth() && f.getDate() === s.getDate)
-        }
-        return transactions.filter(t => predicate(t, date)).reduce(
-            (acc, obj) => acc + obj.date, 0)
-    }
-
     function getTransactionsByDate(date: Date) {
         return transactions.filter(t => t.date === date)
     }
 
-    const getMonth = (date) => {
-        let result = date.toLocaleString('default', {month: 'short'})
-        return result.charAt(0).toUpperCase() + result.slice(1);
-    }
+
 
     return (
         <div>
             {getDateList().map(d =>
                 <div key={d.getMonth() + " " + d.getDate()}>
-                    <h4>{getMonth(d) + " " + d.getDate()}</h4>
+                    <h4>{parseMonthYear(d)}</h4>
                     <div>
-                        {getTransactionsByDate(d).map(t => <TransactionItem transaction={t}
+                        {getTransactionsByDate(d).map(t => <TransactionItem incomeSourceList={incomeSourceList} accountList={accountList} transaction={t}
                                                                             editTransaction={editTransaction}
-                                                                            deleteTransaction={deleteTransaction}/>)}
+                                                                            deleteTransaction={deleteTransaction} expenseTypeList={expenseTypeList}/>)}
                     </div>
                 </div>)}
+            <button onClick={() => setCreateMode(true)}>Create Transaction</button>
             {(() => {
-                if (isCreateMode === true) return <CreateTransaction
-                    setActive={setCreateMode()} incomeSourceList={incomeSourceList} accountList={accountList}
-                    createTransaction={addTransaction} expenseTypeList={expenseTypeList}/>
+                if (isCreateMode === true) return <CreateTransactionModal
+                    setActive={setCreateMode} incomeSourceList={incomeSourceList} accountList={accountList}
+                    addTransaction={addTransaction} expenseTypeList={expenseTypeList}/>
             })()}
         </div>
     )

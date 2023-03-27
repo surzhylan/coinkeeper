@@ -43,6 +43,10 @@ export function createIncomeSource(title: string, plannedIncome: number) {
     }
 }
 
+export function isIncomeSource(obj) {
+    return obj.hasOwnProperty('plannedIncome')
+}
+
 function parseAccountList(accountList) {
     return accountList ? accountList.map(a => parseAccount(a)) : []
 }
@@ -51,16 +55,20 @@ export function parseAccount(account) {
     return account ? {
         id: account.id,
         title: account.title,
-        balance: Number(account.balance),
+        initialBalance: Number(account.initialBalance),
     } : null
 }
 
-export function createAccount(title, balance) {
+export function createAccount(title, initialBalance) {
     return {
         id: uuidv4(),
         title: title,
-        balance: balance,
+        initialBalance: initialBalance,
     }
+}
+
+export function isAccount(account) {
+    return account.hasOwnProperty('initialBalance')
 }
 
 function parseTransactionList(transactionList) {
@@ -93,4 +101,23 @@ export function createTransaction(type: TransactionType, source, destination, am
         },
         date: date,
     }
+}
+
+export function checkDate(transaction) {
+    let currDate = new Date().toLocaleDateString("default", {timeZone: "UTC"})
+    let tDate = transaction.date.toLocaleDateString("default", {timeZone: "UTC"})
+    return currDate === tDate
+}
+
+export function parseMonthYear(date) {
+    let month = date.toLocaleString('default', {month: 'short'})
+    month = month.charAt(0).toUpperCase() + month.slice(1);
+    return month + " " + date.getDate()
+}
+
+export function getTransactionType(source, destination) {
+    if (isIncomeSource(source) && isAccount(destination)) return TransactionType.Income
+    if (isAccount(source) && isAccount(destination)) return TransactionType.Transfer
+    else throw Error('Could not determine transaction type')
+    //Todo: Add Outcome
 }

@@ -2,10 +2,10 @@ import {useState} from "react";
 
 const CreateAccountModal = ({setActive, createAccount}) => {
     const [titleInput, setTitleInput] = useState('');
-    const [balanceInput, setBalanceInput] = useState(0);
+    const [initialBalanceInput, setInitialBalanceInput] = useState(0);
     const handleSubmit = (e) => {
         e.preventDefault()
-        createAccount(titleInput, balanceInput)
+        createAccount(titleInput, Number(initialBalanceInput))
         cleanUserInput();
         setActive(false);
     }
@@ -16,13 +16,13 @@ const CreateAccountModal = ({setActive, createAccount}) => {
     }
     const cleanUserInput = () => {
         setTitleInput("");
-        setBalanceInput(0)
+        setInitialBalanceInput(0)
     }
     return (
         <form>
             <input type={"text"} onChange={e => setTitleInput(e.currentTarget.value)}
                    placeholder="Where do you keep your money?"/>
-            <input type={"number"} onChange={e => setBalanceInput(e.currentTarget.value)}
+            <input type={"number"} onChange={e => setInitialBalanceInput(e.currentTarget.value)}
                    placeholder="How much is there?"/>
             <button onClick={handleSubmit}>ADD</button>
             <button onClick={handleCancel}>CANCEL</button>

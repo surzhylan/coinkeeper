@@ -4,9 +4,16 @@ import AppHeader from "./components/AppHeader/AppHeader";
 import AccountList from "./components/AccountList/AccountList";
 import TransactionType from "./data/models/TransactionType";
 import TransactionList from "./components/TransactionList/TransactionList";
-import {createAccount, createIncomeSource, createTransaction, parseUser} from "./data/models/UtilCreateFuncitons";
+import {
+    checkDate,
+    createAccount,
+    createIncomeSource,
+    createTransaction,
+    parseUser
+} from "./data/models/UtilCreateFuncitons";
 
-//Todo: CreateSpendingType()
+//Todo: Не давать сохранять при пустых input
+//Todo: CreateExpenseType()
 //Todo: Ограничение на траты (на тип траты, на день)
 //Todo: график и
 //Todo: Refactor to Typescript and MVVM
@@ -52,11 +59,11 @@ function App() {
     }
 
     //Account actions
-    function addAccount(title, balance) {
-        if (title && balance) {
+    function addAccount(title, initialBalance) {
+        if (title && initialBalance) {
             const updatedUser = {
                 ...user,
-                accountList: [...user.accountList || [], createAccount(title, balance)]
+                accountList: [...user.accountList || [], createAccount(title, initialBalance)]
             };
             setUser(updatedUser);
         }
@@ -87,30 +94,45 @@ function App() {
     }
 
     //Transaction actions
-
-
     function addTransaction(type: TransactionType, source, destination, amount: number, date: Date) {
         //Todo: Add error handling (Source or destination don't exist)
         if (type && source && destination && amount && Date) {
+            let updatedTransactions = [...user.transactionList || [], createTransaction(type, source, destination, amount, date)]
             const updatedUser = {
                 ...user,
-                transactionList: [...user.transactionList || [], createTransaction(type, source, destination, amount, date)]
+                transactionList: updatedTransactions
             };
             setUser(updatedUser);
             console.log(updatedUser)
         }
     }
 
-    function deleteTransaction() {
-
+    function deleteTransaction(deletedId) {
+        if (deletedId) {
+            const updatedUser = {
+                ...user,
+                transactionList: user.transactionList.filter(t => t.id !== deletedId)
+            };
+            setUser(updatedUser)
+        }
     }
 
-    function editTransaction() {
+    function editTransaction(changedTransaction) {
+        if (changedTransaction) {
+            let index = user.transactionList.findIndex(i => i.id === changedTransaction.id)
+            let newList = [...user.transactionList]
+            newList[index] = changedTransaction
 
+            const updatedUser = {
+                ...user,
+                transactionList: newList
+            };
+            setUser(updatedUser)
+        }
     }
 
     function getAllIncomeTransactions() {
-        return user.transactionList.filter(t => TransactionType.Income === t.type)
+        return user.transactionList.filter(t => t.type === TransactionType.Income && checkDate(t))
     }
 
     return (
@@ -139,9 +161,11 @@ function App() {
                                 editIncomeSource={editIncomeSource} incomeTransactions={getAllIncomeTransactions()}/>
                     <AccountList accountList={user.accountList} addAccount={addAccount}
                                  deleteAccount={deleteAccount}
-                                 editAccount={editAccount}/>
+                                 editAccount={editAccount} transactionList={user.transactionList}/>
                     <TransactionList transactions={user.transactionList} addTransaction={addTransaction}
-                                     deleteTransaction={deleteTransaction} editTransaction={editTransaction}/>
+                                     deleteTransaction={deleteTransaction} editTransaction={editTransaction}
+                                     accountList={user.accountList} incomeSourceList={user.incomeSourceList}
+                                     expenseTypeList={[]}/>
                 </div>}
         </div>)
 }

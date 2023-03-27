@@ -1,23 +1,26 @@
 import {useState} from "react";
-import TransactionType from "../../../data/models/TransactionType";
+import DatePicker from "react-datepicker";
+import 'react-datepicker/dist/react-datepicker.css'
+
 
 const EditTransactionModal = ({
-                                  active,
                                   setActive,
                                   editTransaction,
                                   transaction,
                                   deleteTransaction,
-                                  incomeSourceList,
-                                  accountList
+                                  sourceList,
+                                  destinationList
                               }) => {
-    const [sourceInput, setSourceInput] = useState(transaction.source.title);
-    const [destinationInput, setDestinationInput] = useState(transaction.destination.title);
+    const [sourceInput, setSourceInput] = useState(transaction.source);
+    const [destinationInput, setDestinationInput] = useState(transaction.destination);
     const [amountInput, setAmountInput] = useState(transaction.amount)
+    const [dateInput, setDateInput] = useState(transaction.date)
     const handleSubmit = (e) => {
         const changedTransaction = transaction
         changedTransaction.source = sourceInput
         changedTransaction.destination = destinationInput
         changedTransaction.amount = amountInput
+        changedTransaction.date = dateInput
         e.preventDefault()
         editTransaction(changedTransaction)
         setActive(false);
@@ -28,8 +31,8 @@ const EditTransactionModal = ({
         cleanUserInput();
     }
     const cleanUserInput = () => {
-        setSourceInput(transaction.source.title);
-        setDestinationInput(transaction.destination.title)
+        setSourceInput(0);
+        setDestinationInput(0)
         setAmountInput(transaction.amount)
     }
     const handleDelete = (e) => {
@@ -39,26 +42,34 @@ const EditTransactionModal = ({
         cleanUserInput();
     }
 
-    function getSelectSourceList() {
-        switch (transaction.type) {
-            case TransactionType.Income:
-                return incomeSourceList
-            case TransactionType.Outcome:
-            case TransactionType.Transfer:
-                return accountList
-            default:
-                return []
-        }
-    }
-
     return (
-        <form hidden={!active}>
+        <form onClick={e => e.stopPropagation()}>
             <button onClick={handleDelete}>DELETE</button>
-            <select>
-                {getSelectSourceList().map(s => <option value={s} title={s.title}/>)}
-            </select>
-            <input type={"number"} value={amountInput} onChange={e => setAmountInput(e.currentTarget.value)}
-                   placeholder="How much is income per month?"/>
+            <label>
+                From:
+                <select onChange={e => setSourceInput(sourceList[e.currentTarget.value])}>
+                    {sourceList.map((s, i) =>
+                        <option key={i} value={i}
+                        >{s.title}</option>)}
+                </select>
+            </label>
+            <label>
+                To:
+                <select onChange={e => setDestinationInput(destinationList[e.currentTarget.value])}>
+                    {destinationList.map((d, i) =>
+                        <option key={i} value={i}
+                        >{d.title}</option>)}
+                </select>
+            </label>
+            <label>
+                Date:
+                <DatePicker selected={dateInput} onChange={(date) => setDateInput(date)}/>
+            </label>
+            <label>
+                Amount
+                <input type={"number"} value={amountInput} onChange={e => setAmountInput(e.currentTarget.value)}
+                       placeholder="How much is income per month?"/>
+            </label>
             <button onClick={handleSubmit}>SAVE</button>
             <button onClick={handleCancel}>CANCEL</button>
         </form>

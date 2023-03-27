@@ -5,7 +5,7 @@ const CreateIncomeSourceModal = ({setActive, createIncomeSource}) => {
     const [incomeInput, setIncomeInput] = useState(0);
     const handleSubmit = (e) => {
         e.preventDefault()
-        createIncomeSource(titleInput, incomeInput)
+        createIncomeSource(titleInput, Number(incomeInput))
         cleanUserInput();
         setActive(false);
     }

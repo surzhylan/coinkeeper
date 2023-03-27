@@ -2,7 +2,14 @@ import {useState} from "react";
 import TransactionType from "../../../data/models/TransactionType";
 import EditTransactionModal from "./EditTransactionModal";
 
-const TransactionItem = ({transaction, editTransaction, deleteTransaction, accountList, incomeSourceList}) => {
+const TransactionItem = ({
+                             transaction,
+                             editTransaction,
+                             deleteTransaction,
+                             accountList,
+                             incomeSourceList,
+                             expenseTypeList
+                         }) => {
     const [isEditMode, setEditMode] = useState(false)
 
     function getAmountDiv() {
@@ -27,17 +34,18 @@ const TransactionItem = ({transaction, editTransaction, deleteTransaction, accou
     }
 
     return (
-        <div style={{border: "solid 1px yellow"}}>
+        <div style={{border: "solid 1px yellow"}} onClick={() => setEditMode(true)}>
             <p>{transaction.source.title}</p>
             <p>{transaction.destination.title}</p>
             {getAmountDiv()}
-            {() => {
+            {(() => {
                 if (isEditMode) return <EditTransactionModal transaction={transaction}
                                                              deleteTransaction={deleteTransaction}
-                                                             editTransaction={editTransaction} accountList={accountList}
-                                                             incomeSourceList={incomeSourceList}
-                                                             setActive={setEditMode()} active={isEditMode}/>
-            }}
+                                                             editTransaction={editTransaction}
+                                                             sourceList={transaction.type === TransactionType.Income ? incomeSourceList : accountList}
+                                                             destinationList={transaction.type === TransactionType.Outcome ? expenseTypeList : accountList}
+                                                             setActive={setEditMode}/>
+            })()}
 
         </div>
     )

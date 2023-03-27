@@ -13,9 +13,15 @@ const IncomeItem = ({incomeSource, transactions, editIncomeSource, deleteIncomeS
     return (
         <div key={incomeSource.id} style={{border: "solid 1px red"}}>
             <div onClick={() => setEditMode(true)}>
-                <header>{incomeSource.title}</header>
-                <p>{incomeSource.plannedIncome}</p>
-                <p>{getActualIncome()}</p>
+                <h5>{incomeSource.title}</h5>
+                <div>
+                    <span>{incomeSource.plannedIncome}</span>
+                    <span>Planned income</span>
+                </div>
+                <div>
+                    <span>{getActualIncome()}</span>
+                    <span>Actual income</span>
+                </div>
             </div>
             {(() => {
                 if (isEditMode === true) return <EditIncomeSourceModal active={isEditMode}

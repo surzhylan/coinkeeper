@@ -1,6 +1,7 @@
 import IncomeItem from "./IncomeItem/IncomeItem";
 import {useState} from "react";
 import CreateIncomeSourceModal from "./CreateIncomeSourceModal";
+import {parseMonthYear} from "../../data/models/UtilCreateFuncitons";
 
 const IncomeList = ({
                         incomeSourceList,
@@ -19,22 +20,20 @@ const IncomeList = ({
         return incomeSourceList.reduce((acc, obj) => acc + Number(obj.plannedIncome), 0)
     }
 
-    let dateStr = new Date().toLocaleString('en-us', {month: 'short', year: 'numeric'})
-
     return (
         <div>
             <div>
                 <div>
                     <h5>Income</h5>
-                    <p>{dateStr}</p>
+                    <h5>{parseMonthYear(new Date())}</h5>
                 </div>
                 <div>
-                    <h5>{getTotalActualIncome()}</h5>
-                    <p>Actual Income</p>
+                    <span>{getTotalActualIncome()}</span>
+                    <span>Total Actual Income</span>
                 </div>
                 <div>
-                    <h5>{getTotalPlannedIncome()}</h5>
-                    <p>Planned Income</p>
+                    <span>{getTotalPlannedIncome()}</span>
+                    <span>Total Planned Income</span>
                 </div>
             </div>
 
