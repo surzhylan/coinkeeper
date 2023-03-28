@@ -54,7 +54,7 @@ const CreateTransaction = ({setActive, addTransaction, accountList, expenseTypeL
             </label>
             <label>
                 To:
-                <select onChange={e => setDestinationInput(destinationList[e.currentTarget.value])}>
+                <select onChange={e => setDestinationInput(e.currentTarget.value)}>
                     {destinationList.map((d, i) =>
                         <option key={i} value={i}
                         >{d.title}</option>)}

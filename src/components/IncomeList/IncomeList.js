@@ -37,9 +37,12 @@ const IncomeList = ({
 
             <div>
                 {incomeSourceList.map(incomeSource => {
-                    return (<IncomeItem incomeSource={incomeSource}
+                    return (
+                        <div key={incomeSource.id}>
+                            <IncomeItem incomeSource={incomeSource}
                                         transactions={incomeTransactions.filter(t => t.source.id === incomeSource.id)}
-                                        editIncomeSource={editIncomeSource} deleteIncomeSource={deleteIncomeSource}/>)
+                                        editIncomeSource={editIncomeSource} deleteIncomeSource={deleteIncomeSource}/>
+                        </div>)
                 })}
                 <button onClick={() => setCreateMode(true)}>Create Income Source</button>
             </div>

@@ -2,10 +2,10 @@ import {useState} from "react";
 
 const CreateExpenseType = ({setActive, createExpenseType}) => {
     const [titleInput, setTitleInput] = useState('');
-    const [spendPlan, setSpendPlan] = useState(0);
+    const [spendPlan, setSpendPlan] = useState(null);
     const handleSubmit = (e) => {
         e.preventDefault()
-        createExpenseType(titleInput, Number(spendPlan))
+        createExpenseType(titleInput, (spendPlan === null) ? null : Number(spendPlan))
         cleanUserInput();
         setActive(false);
     }

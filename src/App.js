@@ -8,14 +8,13 @@ import {
     checkDate,
     createAccount, createExpenseType,
     createIncomeSource,
-    createTransaction, parseMonthYear,
+    createTransaction, parseMonthDate,
     parseUser
 } from "./data/models/UtilCreateFuncitons";
 import ExpenseTypeList from "./components/ExpenseList/ExpenseTypeList";
 
 //Todo: Не давать сохранять при пустых input
-//Todo: CreateExpenseType()
-//Todo: Ограничение на траты (на тип траты, на день)
+//Todo: Ограничение на траты (на день)
 //Todo: график и
 //Todo: Refactor to Typescript and MVVM
 function App() {
@@ -104,7 +103,6 @@ function App() {
                 transactionList: updatedTransactions
             };
             setUser(updatedUser);
-            console.log(updatedUser)
         }
     }
 
@@ -133,12 +131,12 @@ function App() {
     }
 
     function getIncomeTransactions() {
-        return user.transactionList.filter(t => t.type === TransactionType.Income && checkDate(t))
+        return user.transactionList.filter(t => t.type === TransactionType.Income && checkDate(t.date))
     }
 
     //ExpenseType actions
     function addExpenseType(title: string, spendPlan: number) {
-        if (title && !isNaN(spendPlan) && spendPlan !== null) {
+        if (title && !isNaN(spendPlan)) {
             let updatedExpenseTypes = [...user.expenseTypeList || [], createExpenseType(title, spendPlan)]
             const updatedUser = {
                 ...user,
@@ -201,7 +199,7 @@ function App() {
                     {/*Login and Registration*/}
                 </div>
                 : <div>
-                    <h5>{parseMonthYear(new Date())}</h5>
+                    <h5>{parseMonthDate(new Date())}</h5>
                     <IncomeList incomeSourceList={user.incomeSourceList} addIncome={addIncomeSource}
                                 deleteIncomeSource={deleteIncomeSource}
                                 editIncomeSource={editIncomeSource} incomeTransactions={getIncomeTransactions()}/>

@@ -19,9 +19,9 @@ const ExpenseTypeList = ({expenseTypeList, addExpenseType, editExpenseType, dele
 
     function getSpentByType(expenseType) {
         return transactions.reduce((sum, t) => {
-                if (t.destination.id === expenseType.id) return sum + Number(t.amount)
-            }, 0
-        )
+            if (t.destination.id === expenseType.id) return sum + t.amount
+            else return sum
+        }, 0)
     }
 
     return (
@@ -46,8 +46,10 @@ const ExpenseTypeList = ({expenseTypeList, addExpenseType, editExpenseType, dele
 
             <div>
                 {expenseTypeList.map(e => {
-                    return (<ExpenseTypeItem expenseType={e} deleteExpenseType={deleteExpenseType}
-                                             editExpenseType={editExpenseType} spendAmount={getSpentByType(e)}/>)
+                    return (<div key={e.id}>
+                        <ExpenseTypeItem expenseType={e} deleteExpenseType={deleteExpenseType}
+                                         editExpenseType={editExpenseType} spendAmount={getSpentByType(e)}/>
+                    </div>)
                 })}
                 <button onClick={() => setCreateMode(true)}>Create Expense Type</button>
             </div>

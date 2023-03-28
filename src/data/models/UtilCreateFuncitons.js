@@ -18,10 +18,19 @@ export function parseUser(userInfo) {
             name: 'anonymous',
             email: null,
             password: null,
-            accountList: [],
+            accountList: [
+                createAccount('Cash', 0)
+            ],
             incomeSourceList: [],
             transactionList: [],
-            expenseTypeList: []
+            expenseTypeList: [
+                createExpenseType('Groceries', null),
+                createExpenseType('Transport', null),
+                createExpenseType('Shopping', null),
+                createExpenseType('Entertainment', null),
+                createExpenseType('Services', null),
+                createExpenseType('FinancialExpenses', null)
+            ]
         }
 }
 
@@ -101,21 +110,21 @@ export function createTransaction(type: TransactionType, source, destination, am
             id: destination.id,
             title: destination.title
         },
-        date: date,
+        date: new Date(date.setHours(0, 0, 0,)),
     }
 }
 
-export function checkDate(transaction) {
-    let currDate = new Date().toLocaleDateString("default", {timeZone: "UTC"})
-    let tDate = transaction.date.toLocaleDateString("default", {timeZone: "UTC"})
-    return currDate === tDate
+export function checkDate(date: Date) {
+    let currDate = new Date().setHours(0, 0, 0, 0)
+    return currDate === date.setHours(0, 0, 0, 0)
 }
 
-export function parseMonthYear(date) {
+export function parseMonthDate(date) {
     let month = date.toLocaleString('default', {month: 'short'})
     month = month.charAt(0).toUpperCase() + month.slice(1);
     return month + " " + date.getDate()
 }
+
 
 export function getTransactionType(source, destination) {
     if (isIncomeSource(source) && isAccount(destination)) return TransactionType.Income

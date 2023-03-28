@@ -11,7 +11,7 @@ const IncomeItem = ({incomeSource, transactions, editIncomeSource, deleteIncomeS
     }
 
     return (
-        <div key={incomeSource.id} style={{border: "solid 1px red"}}>
+        <div style={{border: "solid 1px yellow"}}>
             <div onClick={() => setEditMode(true)}>
                 <h5>{incomeSource.title}</h5>
                 <div>

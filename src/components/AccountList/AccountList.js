@@ -44,9 +44,11 @@ const AccountList = ({
 
             <div>
                 {accountList.map(account => {
-                    return (<AccountItem account={account}
-                                         editAccount={editAccount} deleteAccount={deleteAccount}
-                                         accountBalance={getAccountBalance(account)}/>)
+                    return (<div key={account.id}>
+                        <AccountItem account={account}
+                                     editAccount={editAccount} deleteAccount={deleteAccount}
+                                     accountBalance={getAccountBalance(account)}/>
+                    </div>)
                 })}
                 <button onClick={() => setCreateMode(true)}>Create Account</button>
             </div>
