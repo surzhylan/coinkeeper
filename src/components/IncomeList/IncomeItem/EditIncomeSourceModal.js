@@ -3,14 +3,17 @@ import {useState} from "react";
 const EditIncomeSourceModal = ({active, setActive, editIncomeSource, incomeSource, deleteIncomeSource}) => {
     const [titleInput, setTitleInput] = useState(incomeSource.title);
     const [incomeInput, setIncomeInput] = useState(incomeSource.plannedIncome);
+    const [alertMode, setAlertMode] = useState(false)
+    const titleInputStyle = alertMode ? {border: '1px solid red'} : {}
     const handleSubmit = (e) => {
-        const changedIncomeSource = incomeSource
-        changedIncomeSource.title = titleInput
-        changedIncomeSource.plannedIncome = incomeInput
-
         e.preventDefault()
-        editIncomeSource(changedIncomeSource)
-        setActive(false);
+        if (titleInput) {
+            const changedIncomeSource = incomeSource
+            changedIncomeSource.title = titleInput
+            changedIncomeSource.plannedIncome = incomeInput === '' ? '' : Number(incomeInput)
+            editIncomeSource(changedIncomeSource)
+            setActive(false);
+        } else setAlertMode(true)
     }
     const handleCancel = (e) => {
         e.preventDefault()
@@ -29,13 +32,15 @@ const EditIncomeSourceModal = ({active, setActive, editIncomeSource, incomeSourc
     }
     return (
         <form hidden={!active}>
-            <button onClick={handleDelete}>DELETE</button>
-            <input type={"text"} value={titleInput} onChange={e => setTitleInput(e.currentTarget.value)}
+            <input style={titleInputStyle} type={"text"} value={titleInput}
+                   onChange={e => setTitleInput(e.currentTarget.value)}
                    placeholder="What is your income?"/>
+            {alertMode ? <span>Required field</span> : ''}
             <input type={"number"} value={incomeInput} onChange={e => setIncomeInput(e.currentTarget.value)}
                    placeholder="How much is income per month?"/>
             <button onClick={handleSubmit}>SAVE</button>
             <button onClick={handleCancel}>CANCEL</button>
+            <button onClick={handleDelete}>DELETE</button>
         </form>
     )
 }

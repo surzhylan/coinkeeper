@@ -3,12 +3,12 @@ import EditExpenseTypeItem from "./EditExpenseTypeItem";
 
 const ExpenseTypeItem = ({expenseType, spendAmount, editExpenseType, deleteExpenseType}) => {
     const [isEditMode, setEditMode] = useState(false)
-    const style = (spendAmount > expenseType.spendPlan && expenseType.spendPlan !== null) ? {border: "solid 1px red"} : {border: "solid 1px green"}
+    const style = (spendAmount > expenseType.spendPlan && expenseType.spendPlan !== '') ? {border: "solid 1px red"} : {border: "solid 1px green"}
     return (
         <div style={style}>
             <div onClick={() => setEditMode(true)}>
                 <h5>{expenseType.title}</h5>
-                {expenseType.spendPlan === null
+                {expenseType.spendPlan === ''
                     ? <span></span>
                     : <div>
                         <span>{expenseType.spendPlan}</span>

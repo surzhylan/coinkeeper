@@ -3,14 +3,17 @@ import {useState} from "react";
 const EditExpenseTypeItem = ({active, setActive, editExpenseType, expenseType, deleteExpenseType}) => {
     const [titleInput, setTitleInput] = useState(expenseType.title);
     const [spendPlan, setSpendPlan] = useState(expenseType.spendPlan);
+    const [alertMode, setAlertMode] = useState(false)
+    const titleInputStyle = alertMode ? {border: '1px solid red'} : {}
     const handleSubmit = (e) => {
-        const changedExpenseType = expenseType
-        changedExpenseType.title = titleInput
-        changedExpenseType.spendPlan = spendPlan
-
         e.preventDefault()
-        editExpenseType(changedExpenseType)
-        setActive(false);
+        if (titleInput) {
+            const changedExpenseType = expenseType
+            changedExpenseType.title = titleInput
+            changedExpenseType.spendPlan = spendPlan
+            editExpenseType(changedExpenseType)
+            setActive(false);
+        } else setAlertMode(true)
     }
     const handleCancel = (e) => {
         e.preventDefault()
@@ -29,13 +32,15 @@ const EditExpenseTypeItem = ({active, setActive, editExpenseType, expenseType, d
     }
     return (
         <form hidden={!active}>
-            <button onClick={handleDelete}>DELETE</button>
-            <input type={"text"} value={titleInput} onChange={e => setTitleInput(e.currentTarget.value)}
+            <input style={titleInputStyle} type={"text"} value={titleInput}
+                   onChange={e => setTitleInput(e.currentTarget.value)}
                    placeholder="What for do your spend money?"/>
+            {alertMode ? <span>Required field</span> : ''}
             <input type={"number"} value={spendPlan} onChange={e => setSpendPlan(e.currentTarget.value)}
                    placeholder="Planning to spend per month"/>
             <button onClick={handleSubmit}>SAVE</button>
             <button onClick={handleCancel}>CANCEL</button>
+            <button onClick={handleDelete}>DELETE</button>
         </form>
     )
 }

@@ -1,16 +1,20 @@
 import {useState} from "react";
 
-const EditAccountModal = ({setActive, editAccount, account, deleteAccount}) => {
+const EditAccountModal = ({setActive, editAccount, account, deleteAccount, accountBalance}) => {
+    const [alertMode, setAlertMode] = useState(false)
     const [titleInput, setTitleInput] = useState(account.title);
-    const [balance, setBalance] = useState(account.balance);
-    const handleSubmit = (e) => {
-        const changedAccount = account
-        changedAccount.title = titleInput
-        changedAccount.balance = balance
+    const [balanceInput, setBalanceInput] = useState(accountBalance);
+    const titleInputStyle = alertMode ? {border: '1px solid red'} : {}
 
+    const handleSubmit = (e) => {
         e.preventDefault()
-        editAccount(changedAccount)
-        setActive(false);
+        if (titleInput) {
+            const changedAccount = account
+            changedAccount.title = titleInput
+            changedAccount.initialBalance = balanceInput - (accountBalance - account.initialBalance)
+            editAccount(changedAccount)
+            setActive(false);
+        } else setAlertMode(true)
     }
     const handleCancel = (e) => {
         e.preventDefault()
@@ -19,7 +23,7 @@ const EditAccountModal = ({setActive, editAccount, account, deleteAccount}) => {
     }
     const cleanUserInput = () => {
         setTitleInput(account.title);
-        setBalance(account.balance)
+        setBalanceInput(accountBalance)
     }
     const handleDelete = (e) => {
         deleteAccount(account.id)
@@ -29,13 +33,15 @@ const EditAccountModal = ({setActive, editAccount, account, deleteAccount}) => {
     }
     return (
         <form>
-            <button onClick={handleDelete}>DELETE</button>
-            <input type={"text"} value={titleInput} onChange={e => setTitleInput(e.currentTarget.value)}
+            <input style={titleInputStyle} type={"text"} value={titleInput}
+                   onChange={e => setTitleInput(e.currentTarget.value)}
                    placeholder="Where do you keep your money?"/>
-            <input type={"number"} value={balance} onChange={e => setBalance(e.currentTarget.value)}
+            {alertMode ? <span>Required field</span> : ''}
+            <input type={"number"} value={balanceInput} onChange={e => setBalanceInput(e.currentTarget.value)}
                    placeholder="How much is there?"/>
             <button onClick={handleSubmit}>SAVE</button>
             <button onClick={handleCancel}>CANCEL</button>
+            <button onClick={handleDelete}>DELETE</button>
         </form>
     )
 }

@@ -14,10 +14,13 @@ const IncomeItem = ({incomeSource, transactions, editIncomeSource, deleteIncomeS
         <div style={{border: "solid 1px yellow"}}>
             <div onClick={() => setEditMode(true)}>
                 <h5>{incomeSource.title}</h5>
-                <div>
-                    <span>{incomeSource.plannedIncome}</span>
-                    <span>Planned income</span>
-                </div>
+                {incomeSource.plannedIncome === ''
+                    ? ''
+                    : <div>
+                        <span>{incomeSource.plannedIncome}</span>
+                        <span>Planned income</span>
+                    </div>
+                }
                 <div>
                     <span>{getActualIncome()}</span>
                     <span>Actual income</span>

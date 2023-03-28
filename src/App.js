@@ -15,6 +15,7 @@ import ExpenseTypeList from "./components/ExpenseList/ExpenseTypeList";
 
 //Todo: Не давать сохранять при пустых input
 //Todo: Ограничение на траты (на день)
+//Todo: When deleting income source or account must be two options with saving history or not
 //Todo: график и
 //Todo: Refactor to Typescript and MVVM
 function App() {
@@ -27,11 +28,13 @@ function App() {
 
     //IncomeSource actions
     function addIncomeSource(title, plannedIncome) {
-        const updatedUser = {
-            ...user,
-            incomeSourceList: [...user.incomeSourceList, createIncomeSource(title, plannedIncome)]
-        };
-        setUser(updatedUser);
+        if (title && !isNaN(plannedIncome)) {
+            const updatedUser = {
+                ...user,
+                incomeSourceList: [...user.incomeSourceList, createIncomeSource(title, plannedIncome)]
+            };
+            setUser(updatedUser);
+        }
     }
 
     function editIncomeSource(changedIncome) {
@@ -60,7 +63,7 @@ function App() {
 
     //Account actions
     function addAccount(title, initialBalance) {
-        if (title && initialBalance) {
+        if (title && !isNaN(initialBalance)) {
             const updatedUser = {
                 ...user,
                 accountList: [...user.accountList || [], createAccount(title, initialBalance)]
@@ -96,7 +99,7 @@ function App() {
     //Transaction actions
     function addTransaction(type: TransactionType, source, destination, amount: number, date: Date) {
         //Todo: Add error handling (Source or destination don't exist)
-        if (type && source && destination && amount && date) {
+        if (type && source && destination && !isNaN(amount) && date) {
             let updatedTransactions = [...user.transactionList || [], createTransaction(type, source, destination, amount, date)]
             const updatedUser = {
                 ...user,

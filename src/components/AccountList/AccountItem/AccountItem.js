@@ -16,7 +16,7 @@ const AccountItem = ({account, editAccount, deleteAccount, accountBalance}) => {
                 if (isEditMode === true) return <EditAccountModal
                     setActive={setEditMode} account={account}
                     editAccount={editAccount}
-                    deleteAccount={deleteAccount}/>
+                    deleteAccount={deleteAccount} accountBalance={accountBalance}/>
             })()}
 
         </div>

@@ -11,19 +11,24 @@ const EditTransactionModal = ({
                                   sourceList,
                                   destinationList
                               }) => {
-    const [sourceInput, setSourceInput] = useState(transaction.source);
-    const [destinationInput, setDestinationInput] = useState(transaction.destination);
+    const [sourceInput, setSourceInput] = useState(sourceList.findIndex(s => s.id === transaction.source.id))
+    const [destinationInput, setDestinationInput] = useState(destinationList.findIndex(s => s.id === transaction.destination.id))
     const [amountInput, setAmountInput] = useState(transaction.amount)
     const [dateInput, setDateInput] = useState(transaction.date)
+    const [alertMode, setAlertMode] = useState(false)
+
     const handleSubmit = (e) => {
-        const changedTransaction = transaction
-        changedTransaction.source = sourceInput
-        changedTransaction.destination = destinationInput
-        changedTransaction.amount = amountInput
-        changedTransaction.date = dateInput
         e.preventDefault()
-        editTransaction(changedTransaction)
-        setActive(false);
+        console.log(!isNaN(sourceInput) && !isNaN(destinationInput))
+        if (!isNaN(amountInput) && dateInput && !isNaN(sourceInput) && !isNaN(destinationInput)) {
+            const changedTransaction = transaction
+            changedTransaction.source = sourceList[sourceInput]
+            changedTransaction.destination = destinationList[destinationInput]
+            changedTransaction.amount = Number(amountInput)
+            changedTransaction.date = dateInput
+            editTransaction(changedTransaction)
+            setActive(false);
+        } else setAlertMode(true)
     }
     const handleCancel = (e) => {
         e.preventDefault()
@@ -44,10 +49,9 @@ const EditTransactionModal = ({
 
     return (
         <form onClick={e => e.stopPropagation()}>
-            <button onClick={handleDelete}>DELETE</button>
             <label>
                 From:
-                <select onChange={e => setSourceInput(sourceList[e.currentTarget.value])}>
+                <select defaultValue={sourceInput} onChange={e => setSourceInput(e.currentTarget.value)}>
                     {sourceList.map((s, i) =>
                         <option key={i} value={i}
                         >{s.title}</option>)}
@@ -55,7 +59,7 @@ const EditTransactionModal = ({
             </label>
             <label>
                 To:
-                <select onChange={e => setDestinationInput(destinationList[e.currentTarget.value])}>
+                <select defaultValue={destinationInput} onChange={e => setDestinationInput(e.currentTarget.value)}>
                     {destinationList.map((d, i) =>
                         <option key={i} value={i}
                         >{d.title}</option>)}
@@ -70,8 +74,10 @@ const EditTransactionModal = ({
                 <input type={"number"} value={amountInput} onChange={e => setAmountInput(e.currentTarget.value)}
                        placeholder="How much is income per month?"/>
             </label>
+            {alertMode ? <span>Fields are required</span> : ''}
             <button onClick={handleSubmit}>SAVE</button>
             <button onClick={handleCancel}>CANCEL</button>
+            <button onClick={handleDelete}>DELETE</button>
         </form>
     )
 }

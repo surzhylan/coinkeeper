@@ -9,12 +9,15 @@ const CreateTransaction = ({setActive, addTransaction, accountList, expenseTypeL
     const [destinationList, setDestinationList] = useState(accountList)
     const [sourceInput, setSourceInput] = useState(0)
     const [destinationInput, setDestinationInput] = useState(0)
+    const [alertMode, setAlertMode] = useState(false)
     const handleSubmit = (e) => {
         e.preventDefault()
-        let type = getTransactionType(sourceList[sourceInput], destinationList[destinationInput])
-        addTransaction(type, sourceList[sourceInput], destinationList[destinationInput], Number(amountInput), dateInput)
-        cleanUserInput();
-        setActive(false);
+        if (!isNaN(amountInput) && dateInput && !isNaN(sourceInput) && !isNaN(destinationInput)) {
+            let type = getTransactionType(sourceList[sourceInput], destinationList[destinationInput])
+            addTransaction(type, sourceList[sourceInput], destinationList[destinationInput], Number(amountInput), dateInput)
+            cleanUserInput();
+            setActive(false);
+        } else setAlertMode(true)
     }
     const handleCancel = (e) => {
         e.preventDefault()
@@ -69,6 +72,7 @@ const CreateTransaction = ({setActive, addTransaction, accountList, expenseTypeL
                 <input type={"number"} value={amountInput} onChange={e => setAmountInput(e.currentTarget.value)}
                        placeholder="How much is income per month?"/>
             </label>
+            {alertMode ? <span>Fields are required</span> : ''}
             <button onClick={handleSubmit}>SAVE</button>
             <button onClick={handleCancel}>CANCEL</button>
         </form>

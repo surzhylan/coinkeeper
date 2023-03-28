@@ -13,12 +13,14 @@ const AccountList = ({
     const [isCreateMode, setCreateMode] = useState(false)
 
     function getTotalBalance() {
-        let result = accountList.reduce((acc, obj) => acc + obj.initialBalance, 0)
-        result += transactionList.reduce((acc, obj) => {
-            if (obj.type === TransactionType.Income) return acc + obj.amount
-            if (obj.type === TransactionType.Outcome) return acc - obj.amount
+        return accountList.reduce((sum, a) => {
+            let transactionAmount = transactionList.reduce((tSum, t) => {
+                if (t.type === TransactionType.Income && t.destination.id === a.id) return tSum + t.amount
+                if (t.type === TransactionType.Outcome && t.destination.source === a.id) return tSum - t.amount
+                else return tSum
+            }, 0)
+            return sum + transactionAmount
         }, 0)
-        return result
     }
 
     function getAccountBalance(account) {
