@@ -13,11 +13,11 @@ import {
 } from "./data/models/UtilCreateFuncitons";
 import ExpenseTypeList from "./components/ExpenseList/ExpenseTypeList";
 
-//Todo: Не давать сохранять при пустых input
 //Todo: Ограничение на траты (на день)
 //Todo: When deleting income source or account must be two options with saving history or not
 //Todo: график и
 //Todo: Refactor to Typescript and MVVM
+//Todo: User login, registration
 function App() {
     const savedUser = localStorage.getItem('user')
     const [user, setUser] = useState(parseUser(JSON.parse(savedUser)));
@@ -179,23 +179,6 @@ function App() {
 
     return (
         <div>
-            <button onClick={() => {
-                addIncomeSource('Scholarship', 36000)
-            }}>Add Income Source Example
-            </button>
-            <button onClick={() => {
-                addAccount('Cash', 500)
-            }}>Add Account Example
-            </button>
-            <button onClick={() => {
-                addTransaction(TransactionType.Income, user.incomeSourceList[0], user.accountList[0], 5000, new Date())
-            }}>Add Transaction Example
-            </button>
-            <button onClick={() => {
-                addExpenseType('Shopping', 0)
-            }}>Add Expense Type Example
-            </button>
-
             <AppHeader user={user}/>
             {user === null
                 ? <div>

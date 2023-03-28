@@ -24,12 +24,12 @@ export function parseUser(userInfo) {
             incomeSourceList: [],
             transactionList: [],
             expenseTypeList: [
-                createExpenseType('Groceries', null),
-                createExpenseType('Transport', null),
-                createExpenseType('Shopping', null),
-                createExpenseType('Entertainment', null),
-                createExpenseType('Services', null),
-                createExpenseType('FinancialExpenses', null)
+                createExpenseType('Groceries', ''),
+                createExpenseType('Transport', ''),
+                createExpenseType('Shopping', ''),
+                createExpenseType('Entertainment', ''),
+                createExpenseType('Services', ''),
+                createExpenseType('FinancialExpenses', '')
             ]
         }
 }
