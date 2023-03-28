@@ -10,7 +10,8 @@ export function parseUser(userInfo) {
             password: userInfo.password,
             accountList: parseAccountList(userInfo.accountList),
             incomeSourceList: parseIncomeSourceList(userInfo.incomeSourceList),
-            transactionList: parseTransactionList(userInfo.transactionList)
+            transactionList: parseTransactionList(userInfo.transactionList),
+            expenseTypeList: parseExpenseTypeList(userInfo.expenseTypeList)
         }
         : {
             id: uuidv4(),
@@ -19,7 +20,8 @@ export function parseUser(userInfo) {
             password: null,
             accountList: [],
             incomeSourceList: [],
-            transactionList: []
+            transactionList: [],
+            expenseTypeList: []
         }
 }
 
@@ -118,6 +120,32 @@ export function parseMonthYear(date) {
 export function getTransactionType(source, destination) {
     if (isIncomeSource(source) && isAccount(destination)) return TransactionType.Income
     if (isAccount(source) && isAccount(destination)) return TransactionType.Transfer
+    if (isAccount(source) && isExpenseType(destination)) return TransactionType.Outcome
     else throw Error('Could not determine transaction type')
     //Todo: Add Outcome
+}
+
+//Expense operations
+function parseExpenseTypeList(expenseTypeList) {
+    return expenseTypeList ? expenseTypeList.map(e => parseExpenseType(e)) : []
+}
+
+export function parseExpenseType(expenseType) {
+    return expenseType ? {
+        id: expenseType.id,
+        title: expenseType.title,
+        spendPlan: expenseType.spendPlan
+    } : null
+}
+
+export function createExpenseType(title, spendPlan) {
+    return {
+        id: uuidv4(),
+        title: title,
+        spendPlan: spendPlan
+    }
+}
+
+export function isExpenseType(account) {
+    return account.hasOwnProperty('spendPlan')
 }

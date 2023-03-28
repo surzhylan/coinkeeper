@@ -1,7 +1,6 @@
 import IncomeItem from "./IncomeItem/IncomeItem";
 import {useState} from "react";
 import CreateIncomeSourceModal from "./CreateIncomeSourceModal";
-import {parseMonthYear} from "../../data/models/UtilCreateFuncitons";
 
 const IncomeList = ({
                         incomeSourceList,
@@ -25,7 +24,6 @@ const IncomeList = ({
             <div>
                 <div>
                     <h5>Income</h5>
-                    <h5>{parseMonthYear(new Date())}</h5>
                 </div>
                 <div>
                     <span>{getTotalActualIncome()}</span>

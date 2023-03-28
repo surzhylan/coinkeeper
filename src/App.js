@@ -6,11 +6,12 @@ import TransactionType from "./data/models/TransactionType";
 import TransactionList from "./components/TransactionList/TransactionList";
 import {
     checkDate,
-    createAccount,
+    createAccount, createExpenseType,
     createIncomeSource,
-    createTransaction,
+    createTransaction, parseMonthYear,
     parseUser
 } from "./data/models/UtilCreateFuncitons";
+import ExpenseTypeList from "./components/ExpenseList/ExpenseTypeList";
 
 //Todo: Не давать сохранять при пустых input
 //Todo: CreateExpenseType()
@@ -96,7 +97,7 @@ function App() {
     //Transaction actions
     function addTransaction(type: TransactionType, source, destination, amount: number, date: Date) {
         //Todo: Add error handling (Source or destination don't exist)
-        if (type && source && destination && amount && Date) {
+        if (type && source && destination && amount && date) {
             let updatedTransactions = [...user.transactionList || [], createTransaction(type, source, destination, amount, date)]
             const updatedUser = {
                 ...user,
@@ -131,8 +132,48 @@ function App() {
         }
     }
 
-    function getAllIncomeTransactions() {
+    function getIncomeTransactions() {
         return user.transactionList.filter(t => t.type === TransactionType.Income && checkDate(t))
+    }
+
+    //ExpenseType actions
+    function addExpenseType(title: string, spendPlan: number) {
+        if (title && !isNaN(spendPlan) && spendPlan !== null) {
+            let updatedExpenseTypes = [...user.expenseTypeList || [], createExpenseType(title, spendPlan)]
+            const updatedUser = {
+                ...user,
+                expenseTypeList: updatedExpenseTypes
+            };
+            setUser(updatedUser);
+        }
+    }
+
+    function deleteExpenseType(deletedId) {
+        if (deletedId) {
+            const updatedUser = {
+                ...user,
+                expenseTypeList: user.expenseTypeList.filter(t => t.id !== deletedId)
+            };
+            setUser(updatedUser)
+        }
+    }
+
+    function editExpenseType(changedExpenseType) {
+        if (changedExpenseType) {
+            let index = user.expenseTypeList.findIndex(i => i.id === changedExpenseType.id)
+            let newList = [...user.expenseTypeList]
+            newList[index] = changedExpenseType
+
+            const updatedUser = {
+                ...user,
+                expenseTypeList: newList
+            };
+            setUser(updatedUser)
+        }
+    }
+
+    function getOutcomeTransactions() {
+        return user.transactionList.filter(t => t.type === TransactionType.Outcome)
     }
 
     return (
@@ -149,6 +190,10 @@ function App() {
                 addTransaction(TransactionType.Income, user.incomeSourceList[0], user.accountList[0], 5000, new Date())
             }}>Add Transaction Example
             </button>
+            <button onClick={() => {
+                addExpenseType('Shopping', 0)
+            }}>Add Expense Type Example
+            </button>
 
             <AppHeader user={user}/>
             {user === null
@@ -156,18 +201,23 @@ function App() {
                     {/*Login and Registration*/}
                 </div>
                 : <div>
+                    <h5>{parseMonthYear(new Date())}</h5>
                     <IncomeList incomeSourceList={user.incomeSourceList} addIncome={addIncomeSource}
                                 deleteIncomeSource={deleteIncomeSource}
-                                editIncomeSource={editIncomeSource} incomeTransactions={getAllIncomeTransactions()}/>
+                                editIncomeSource={editIncomeSource} incomeTransactions={getIncomeTransactions()}/>
                     <AccountList accountList={user.accountList} addAccount={addAccount}
                                  deleteAccount={deleteAccount}
                                  editAccount={editAccount} transactionList={user.transactionList}/>
                     <TransactionList transactions={user.transactionList} addTransaction={addTransaction}
                                      deleteTransaction={deleteTransaction} editTransaction={editTransaction}
                                      accountList={user.accountList} incomeSourceList={user.incomeSourceList}
-                                     expenseTypeList={[]}/>
+                                     expenseTypeList={user.expenseTypeList}/>
+                    <ExpenseTypeList expenseTypeList={user.expenseTypeList} editExpenseType={editExpenseType}
+                                     deleteExpenseType={deleteExpenseType} addExpenseType={addExpenseType}
+                                     transactions={getOutcomeTransactions()}/>
                 </div>}
-        </div>)
+        </div>
+    )
 }
 
 export default App;

@@ -23,8 +23,6 @@ const TransactionList = ({
         return transactions.filter(t => t.date === date)
     }
 
-
-
     return (
         <div>
             {getDateList().map(d =>
