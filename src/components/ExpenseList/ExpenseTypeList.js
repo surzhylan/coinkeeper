@@ -1,6 +1,9 @@
 import {useState} from "react";
+import { Button } from "react-bootstrap";
 import CreateExpenseType from "./CreateExpenseType";
 import ExpenseTypeItem from "./ExpenseItem/ExpenseTypeItem";
+import styles from './ExpenseTypeList.module.css';
+
 
 const ExpenseTypeList = ({expenseTypeList, addExpenseType, editExpenseType, deleteExpenseType, transactions,}) => {
     const [isCreateMode, setCreateMode] = useState(false)
@@ -26,32 +29,48 @@ const ExpenseTypeList = ({expenseTypeList, addExpenseType, editExpenseType, dele
 
     return (
         <div>
-            <div>
-                <div>
+            <div className={styles.expenseTitle}>
+                <div className={styles.title}>
                     <h5>Expense Types</h5>
                 </div>
-                <div>
-                    <span>{getTotalSpent()}</span>
-                    <span>Total Spent</span>
-                </div>
-                <div>
-                    <span>{getTotalRemains()}</span>
-                    <span>Total remains</span>
-                </div>
-                <div>
-                    <span>{getTotalBudget()}</span>
-                    <span>Total budget</span>
+                <div className={styles.text}>
+                    <div className={styles.totalSpent}>
+                        <div className={styles.totalSpentText}>
+                            <span>{getTotalSpent()}</span>
+                        </div>
+                        <div className={styles.totalSpentTitle}>
+                            <span>Total Spent</span>
+                        </div>
+                    </div>
+                    <div className={styles.totalSpent}>
+                        <div className={styles.totalSpentText}>
+                            <span>{getTotalRemains()}</span>
+                        </div>
+                        <div className={styles.totalSpentTitle}>
+                            <span>Total remains</span>
+                        </div>
+                    </div>
+                    <div className={styles.totalSpent}>
+                        <div className={styles.totalSpentText}>
+                            <span>{getTotalBudget()}</span>
+                        </div>
+                       <div className={styles.totalSpentTitle}>
+                            <span>Total budget</span>
+                       </div>
+                    </div>
                 </div>
             </div>
 
-            <div>
+            <div className={styles.expenseItemDiv}>
                 {expenseTypeList.map(e => {
-                    return (<div key={e.id}>
+                    return (<div key={e.id} className={styles.expenseItem}>
                         <ExpenseTypeItem expenseType={e} deleteExpenseType={deleteExpenseType}
                                          editExpenseType={editExpenseType} spendAmount={getSpentByType(e)}/>
                     </div>)
                 })}
-                <button onClick={() => setCreateMode(true)}>Create Expense Type</button>
+               <div className={styles.expenseItemDivButton}>
+                    <Button variant="light" onClick={() => setCreateMode(true)}>Create Expense Type</Button>
+               </div>
             </div>
             {(() => {
                 if (isCreateMode === true) return <CreateExpenseType setActive={setCreateMode}

@@ -1,0 +1,53 @@
+.bodyDiv{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.bodyDivFlex{
+    display: flex;
+}
+
+.mainDiv{
+    border: 1px solid red;
+    margin-top: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 50%;
+}
+
+.mainDivText{
+    font-size: 25px;
+}
+
+.incomeDiv{
+    border: 2px solid black;
+    width: 95%;
+}
+
+
+/* Account */
+.accountList{
+    margin-top: 40px;
+    border: 2px solid purple;
+    width: 95%;
+}
+
+
+.transactionList{
+    border: 1px solid red;
+    margin-top: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 50%;
+}
+
+.transactionListDiv{
+    border: 2px solid black;
+    width: 95%;
+}
+
+.expenseList{
+    border: 2px solid black;
+    width: 95%;
+    margin-top: 40px;
+}

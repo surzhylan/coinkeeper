@@ -2,6 +2,8 @@ import {useState} from "react";
 import AccountItem from "./AccountItem/AccountItem";
 import CreateAccountModal from "./CreateAccountModal";
 import TransactionType from "../../data/models/TransactionType";
+import styles from './AccountList.module.css';
+import { Button } from "react-bootstrap";
 
 const AccountList = ({
                          accountList,
@@ -34,25 +36,31 @@ const AccountList = ({
 
     return (
         <div>
-            <div>
-                <div>
+            <div className={styles.accountList}>
+                <div className={styles.accountTitle}>
                     <h5>Accounts</h5>
                 </div>
-                <div>
-                    <span>{getTotalBalance()}</span>
-                    <span>Total balance</span>
+                <div className={styles.accountBalance}>
+                    <div className={styles.accountBalanceText}>
+                        <span>{getTotalBalance()}</span>
+                    </div>
+                    <div className={styles.accountBalanceTitle}>
+                        <span>Total balance</span>
+                    </div>
                 </div>
             </div>
 
-            <div>
+            <div className={styles.accountListDiv}>
                 {accountList.map(account => {
-                    return (<div key={account.id}>
+                    return (<div key={account.id} className={styles.accountItem}>
                         <AccountItem account={account}
                                      editAccount={editAccount} deleteAccount={deleteAccount}
                                      accountBalance={getAccountBalance(account)}/>
                     </div>)
                 })}
-                <button onClick={() => setCreateMode(true)}>Create Account</button>
+                <div className={styles.accountListDivButton}>
+                    <Button onClick={() => setCreateMode(true)}>Create Account</Button>
+                </div>
             </div>
             {(() => {
                 if (isCreateMode === true) return <CreateAccountModal setActive={setCreateMode}

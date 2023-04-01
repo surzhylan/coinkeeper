@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react";
+import styles from './App.module.css';
 import IncomeList from "./components/IncomeList/IncomeList";
 import AppHeader from "./components/AppHeader/AppHeader";
 import AccountList from "./components/AccountList/AccountList";
@@ -12,6 +13,7 @@ import {
     parseUser
 } from "./data/models/UtilCreateFuncitons";
 import ExpenseTypeList from "./components/ExpenseList/ExpenseTypeList";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 //Todo: Ограничение на траты (на день)
 //Todo: When deleting income source or account must be two options with saving history or not
@@ -178,28 +180,45 @@ function App() {
     }
 
     return (
-        <div>
+        <div className={styles.bodyDiv}>
             <AppHeader user={user}/>
             {user === null
                 ? <div>
                     {/*Login and Registration*/}
                 </div>
-                : <div>
-                    <h5>{parseMonthDate(new Date())}</h5>
-                    <IncomeList incomeSourceList={user.incomeSourceList} addIncome={addIncomeSource}
-                                deleteIncomeSource={deleteIncomeSource}
-                                editIncomeSource={editIncomeSource} incomeTransactions={getIncomeTransactions()}/>
-                    <AccountList accountList={user.accountList} addAccount={addAccount}
-                                 deleteAccount={deleteAccount}
-                                 editAccount={editAccount} transactionList={user.transactionList}/>
-                    <TransactionList transactions={user.transactionList} addTransaction={addTransaction}
-                                     deleteTransaction={deleteTransaction} editTransaction={editTransaction}
-                                     accountList={user.accountList} incomeSourceList={user.incomeSourceList}
-                                     expenseTypeList={user.expenseTypeList}/>
-                    <ExpenseTypeList expenseTypeList={user.expenseTypeList} editExpenseType={editExpenseType}
-                                     deleteExpenseType={deleteExpenseType} addExpenseType={addExpenseType}
-                                     transactions={getOutcomeTransactions()}/>
-                </div>}
+                : <div className={styles.bodyDivFlex}>
+                        <div className={styles.mainDiv}>
+                        <div className={styles.maindiv1}>
+                            <div className={styles.mainDivText}>
+                                <h5>{parseMonthDate(new Date())}</h5>
+                            </div>
+                            <div className={styles.incomeDiv}>
+                                <IncomeList incomeSourceList={user.incomeSourceList} addIncome={addIncomeSource}
+                                            deleteIncomeSource={deleteIncomeSource}
+                                            editIncomeSource={editIncomeSource} incomeTransactions={getIncomeTransactions()}/>
+                            </div>
+                            <div className={styles.accountList}>
+                                <AccountList accountList={user.accountList} addAccount={addAccount}
+                                            deleteAccount={deleteAccount}
+                                            editAccount={editAccount} transactionList={user.transactionList}/>
+                            </div>
+                            <div className={styles.expenseList}>
+                                <ExpenseTypeList expenseTypeList={user.expenseTypeList} editExpenseType={editExpenseType}
+                                                deleteExpenseType={deleteExpenseType} addExpenseType={addExpenseType}
+                        transactions={getOutcomeTransactions()}/>
+                            </div>
+                        </div>
+                    </div>
+                    <div className={styles.transactionList}>
+                        <div className={styles.transactionListDiv}>
+                            <TransactionList transactions={user.transactionList} addTransaction={addTransaction}
+                                            deleteTransaction={deleteTransaction} editTransaction={editTransaction}
+                                            accountList={user.accountList} incomeSourceList={user.incomeSourceList}
+                                            expenseTypeList={user.expenseTypeList}/>
+                        </div>
+                    </div>
+                </div>
+                }
         </div>
     )
 }

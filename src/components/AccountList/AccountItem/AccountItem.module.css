@@ -1,0 +1,67 @@
+.accountItem1Div{
+    max-width: 100%;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+   padding: 10px 5px;
+}
+
+.accountItem1{
+    /*background-color: rgba(0, 255, 255, 0.181);*/
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.title{
+    font-size: 20px;
+    padding: 0;
+}
+
+.title h5{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.imageItem img{
+    width: 50px;
+}
+
+.balance{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 15px;
+}
+
+.balanceTextTitle2{
+    color: rgb(110, 108, 108);
+}
+
+
+/* Edit Income */
+
+.editIncomeDiv{
+    width: 100%;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+}
+
+.editIncomeInputs input{
+    position: inherit;
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 5px;
+    border-style: none;
+    border: 1px solid gray;
+    padding: 0 5px;
+}
+
+.editIncomeButtons{
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}

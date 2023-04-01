@@ -1,4 +1,6 @@
 import {useState} from "react";
+import { Button } from "react-bootstrap";
+import styles from './IncomeList.module.css';
 
 const CreateIncomeSourceModal = ({setActive, createIncomeSource}) => {
     const [titleInput, setTitleInput] = useState('');
@@ -24,13 +26,19 @@ const CreateIncomeSourceModal = ({setActive, createIncomeSource}) => {
     }
     return (
         <form>
-            <input style={titleInputStyle} type={"text"} onChange={e => setTitleInput(e.currentTarget.value)}
-                   placeholder="What is your income?"/>
-            {alertMode ? <span>Required field</span> : ''}
-            <input type={"number"} onChange={e => setIncomeInput(e.currentTarget.value)}
-                   placeholder="How much is income per month?"/>
-            <button onClick={handleSubmit}>ADD</button>
-            <button onClick={handleCancel}>CANCEL</button>
+            <div className={styles.createForm}>
+                <div className={styles.createFormInputs}>
+                    <input style={titleInputStyle} type={"text"} onChange={e => setTitleInput(e.currentTarget.value)}
+                        placeholder="What is your income?"/>
+                    {alertMode ? <span>Required field</span> : ''}
+                    <input type={"number"} onChange={e => setIncomeInput(e.currentTarget.value)}
+                        placeholder="How much is income per month?"/>
+                </div>
+                <div className={styles.createFormButtons}>
+                    <Button variant="dark" size="sm" onClick={handleSubmit}>ADD</Button>
+                    <Button variant="dark" size="sm" onClick={handleCancel}>CANCEL</Button>
+                </div>
+            </div>
         </form>
     )
 }

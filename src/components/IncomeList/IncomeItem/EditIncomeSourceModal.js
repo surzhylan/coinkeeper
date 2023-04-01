@@ -1,4 +1,6 @@
 import {useState} from "react";
+import { Button } from "react-bootstrap";
+import styles from './IncomeItem.module.css';
 
 const EditIncomeSourceModal = ({active, setActive, editIncomeSource, incomeSource, deleteIncomeSource}) => {
     const [titleInput, setTitleInput] = useState(incomeSource.title);
@@ -32,15 +34,21 @@ const EditIncomeSourceModal = ({active, setActive, editIncomeSource, incomeSourc
     }
     return (
         <form hidden={!active}>
-            <input style={titleInputStyle} type={"text"} value={titleInput}
-                   onChange={e => setTitleInput(e.currentTarget.value)}
-                   placeholder="What is your income?"/>
-            {alertMode ? <span>Required field</span> : ''}
-            <input type={"number"} value={incomeInput} onChange={e => setIncomeInput(e.currentTarget.value)}
-                   placeholder="How much is income per month?"/>
-            <button onClick={handleSubmit}>SAVE</button>
-            <button onClick={handleCancel}>CANCEL</button>
-            <button onClick={handleDelete}>DELETE</button>
+            <div className={styles.editIncomeDiv}>
+                <div className={styles.editIncomeInputs}>
+                    <input style={titleInputStyle} type={"text"} value={titleInput}
+                        onChange={e => setTitleInput(e.currentTarget.value)}
+                        placeholder="What is your income?"/>
+                    {alertMode ? <span>Required field</span> : ''}
+                    <input type={"number"} value={incomeInput} onChange={e => setIncomeInput(e.currentTarget.value)}
+                        placeholder="How much is income per month?"/>
+                </div>
+                <div className={styles.editIncomeButtons}>
+                    <Button variant="outline-dark" size="sm" onClick={handleSubmit}>SAVE</Button>
+                    <Button variant="outline-dark" size="sm" onClick={handleCancel}>CANCEL</Button>
+                    <Button variant="outline-dark" size="sm" onClick={handleDelete}>DELETE</Button>
+                </div>
+            </div>
         </form>
     )
 }

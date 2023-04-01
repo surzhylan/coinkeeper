@@ -1,4 +1,6 @@
 import {useState} from "react";
+import { Button } from "react-bootstrap";
+import styles from './AccountList.module.css';
 
 const CreateAccountModal = ({setActive, createAccount}) => {
     const [titleInput, setTitleInput] = useState('')
@@ -24,13 +26,19 @@ const CreateAccountModal = ({setActive, createAccount}) => {
     }
     return (
         <form>
-            <input style={titleInputStyle} type={"text"} onChange={e => setTitleInput(e.currentTarget.value)}
-                   placeholder="Where do you keep your money?"/>
-            {alertMode ? <span>Required field</span> : ''}
-            <input type={"number"} onChange={e => setInitialBalanceInput(e.currentTarget.value)}
-                   placeholder="How much is there?"/>
-            <button onClick={handleSubmit}>ADD</button>
-            <button onClick={handleCancel}>CANCEL</button>
+            <div className={styles.createForm}>
+                <div className={styles.createFormInputs}>
+                    <input style={titleInputStyle} type={"text"} onChange={e => setTitleInput(e.currentTarget.value)}
+                        placeholder="Where do you keep your money?"/>
+                    {alertMode ? <span>Required field</span> : ''}
+                    <input type={"number"} onChange={e => setInitialBalanceInput(e.currentTarget.value)}
+                        placeholder="How much is there?"/>
+                </div>
+                <div className={styles.createFormButtons}>
+                    <Button variant="dark" size="sm" onClick={handleSubmit}>ADD</Button>
+                    <Button variant="dark" size="sm" onClick={handleCancel}>CANCEL</Button>
+                </div>
+            </div>
         </form>
     )
 }

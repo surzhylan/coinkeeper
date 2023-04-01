@@ -1,0 +1,56 @@
+.expenseTitle{
+    background-color: antiquewhite;
+    display: flex;
+    text-align: center;
+    height: 70px;
+    padding: 10px;
+    align-items: center;
+    gap: 15px;
+    position: inherit;
+    justify-content: space-between;
+}
+
+.title{
+    font-size: 25px;
+}
+
+.text{
+    display: flex;
+    gap: 20px;
+}
+
+.totalSpent{
+    display: block;
+}
+
+.expenseItemDiv{
+    display: flex;
+    gap: 20px;
+    height: 430px;
+    background-color: rgba(128, 128, 128, 0.121);
+    flex-wrap: wrap;
+    padding: 10px;
+}
+
+.expenseItem{
+    border: 2px solid red;
+    width: 30%;
+    padding: 0;
+    margin: 0;
+    /*flex-wrap: wrap;*/
+}
+
+.expenseItemDivButton{
+    height: 50%;
+    margin: auto 0;
+    margin-right: 10px;
+}
+
+.expenseItemDivButton button{
+    align-items: center;
+
+    display: flex;
+    flex-direction: column;
+    margin: auto 0;
+
+}

@@ -1,4 +1,6 @@
 import {useState} from "react";
+import { Button } from "react-bootstrap";
+import styles from './AccountItem.module.css';
 
 const EditAccountModal = ({setActive, editAccount, account, deleteAccount, accountBalance}) => {
     const [alertMode, setAlertMode] = useState(false)
@@ -33,15 +35,21 @@ const EditAccountModal = ({setActive, editAccount, account, deleteAccount, accou
     }
     return (
         <form>
-            <input style={titleInputStyle} type={"text"} value={titleInput}
-                   onChange={e => setTitleInput(e.currentTarget.value)}
-                   placeholder="Where do you keep your money?"/>
-            {alertMode ? <span>Required field</span> : ''}
-            <input type={"number"} value={balanceInput} onChange={e => setBalanceInput(e.currentTarget.value)}
-                   placeholder="How much is there?"/>
-            <button onClick={handleSubmit}>SAVE</button>
-            <button onClick={handleCancel}>CANCEL</button>
-            <button onClick={handleDelete}>DELETE</button>
+            <div className={styles.editIncomeDiv}>
+                <div className={styles.editIncomeInputs}>
+                    <input style={titleInputStyle} type={"text"} value={titleInput}
+                        onChange={e => setTitleInput(e.currentTarget.value)}
+                        placeholder="Where do you keep your money?"/>
+                    {alertMode ? <span>Required field</span> : ''}
+                    <input type={"number"} value={balanceInput} onChange={e => setBalanceInput(e.currentTarget.value)}
+                        placeholder="How much is there?"/>
+                </div>
+                <div className={styles.editIncomeButtons}>
+                    <Button variant="outline-dark" size="sm" onClick={handleSubmit}>SAVE</Button>
+                    <Button variant="outline-dark" size="sm" onClick={handleCancel}>CANCEL</Button>
+                    <Button variant="outline-dark" size="sm" onClick={handleDelete}>DELETE</Button>
+                </div>
+            </div>
         </form>
     )
 }

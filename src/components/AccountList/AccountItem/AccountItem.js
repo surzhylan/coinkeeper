@@ -1,15 +1,27 @@
 import {useState} from "react";
 import EditAccountModal from "./EditAccountModal";
+import styles from './AccountItem.module.css';
 
 const AccountItem = ({account, editAccount, deleteAccount, accountBalance}) => {
     const [isEditMode, setEditMode] = useState(false)
     return (
-        <div style={{border: "solid 1px blue"}}>
+        <div style={{border: "solid 1px blue"}} className={styles.accountItem1Div}>
             <div onClick={() => setEditMode(true)}>
-                <h5>{account.title}</h5>
-                <div>
-                    <span>{accountBalance}</span>
-                    <span>Balance</span>
+                <div className={styles.accountItem1}>
+                    <div className={styles.title}>
+                        <h5>{account.title}</h5>
+                    </div>
+                    <div className={styles.imageItem}>
+                        {account.title === 'Khalyk' ? <img src="salaryicon.png"></img> : (account.title === 'Kaspi' ? <img src="freelanceicon.png"></img> : <img src="othericon.png"></img>)}
+                    </div>
+                    <div className={styles.balance}>
+                        <div className={styles.balanceTextTitle1}>
+                            <span>{accountBalance}</span>
+                        </div>
+                        <div className={styles.balanceTextTitle2}>
+                            <span>Balance</span>
+                        </div>
+                    </div>
                 </div>
             </div>
             {(() => {

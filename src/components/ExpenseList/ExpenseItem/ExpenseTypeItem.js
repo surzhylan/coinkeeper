@@ -1,22 +1,41 @@
 import {useState} from "react";
 import EditExpenseTypeItem from "./EditExpenseTypeItem";
+import styles from './ExpenseTypeItem.module.css';
 
 const ExpenseTypeItem = ({expenseType, spendAmount, editExpenseType, deleteExpenseType}) => {
     const [isEditMode, setEditMode] = useState(false)
     const style = (spendAmount > expenseType.spendPlan && expenseType.spendPlan !== '') ? {border: "solid 1px red"} : {border: "solid 1px green"}
     return (
-        <div style={style}>
+        <div style={style} className = {styles.expenseItem1Div}>
             <div onClick={() => setEditMode(true)}>
-                <h5>{expenseType.title}</h5>
-                {expenseType.spendPlan === ''
-                    ? <span></span>
-                    : <div>
-                        <span>{expenseType.spendPlan}</span>
-                        <span>Planning to spend</span>
-                    </div>}
-                <div>
-                    <span>{spendAmount}</span>
-                    <span>Spend</span>
+                <div className={styles.expenseItem1}>
+                    <div className={styles.title}>
+                        <h5>{expenseType.title}</h5>
+                    </div>
+                    <div className={styles.imageItem}>
+                            {expenseType.title === 'Groceries' ? <img src="salaryicon.png"></img> : (expenseType.title === 'Transport' ? <img src="freelanceicon.png"></img> : <img src="othericon.png"></img>)}
+                    </div>
+                    <div className={styles.amount}>
+                        {expenseType.spendPlan === ''
+                            ? <span></span>
+                            : <div className={styles.amountText}>
+                                <div className={styles.amountTextTitle1}>
+                                    <span>{expenseType.spendPlan}</span>
+                                </div>
+                                <div className={styles.amountTextTitle2}>
+                                    <span>Planning to spend</span>
+                                </div>
+                            </div>
+                        }
+                        <div className={styles.amountText}>
+                            <div className={styles.amountTextTitle1}>
+                                <span>{spendAmount}</span>
+                            </div>
+                            <div className={styles.amountTextTitle2}>
+                                <span>Spend</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             {(() => {
