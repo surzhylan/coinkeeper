@@ -42,3 +42,27 @@
 .amountTextTitle2{
     color: rgb(110, 108, 108);
 }
+
+.editExpenseDiv{
+    width: 100%;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+}
+
+.editExpenseInputs input{
+    position: inherit;
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 5px;
+    border-style: none;
+    border: 1px solid gray;
+    padding: 0 5px;
+}
+
+.editExpenseButtons {
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}

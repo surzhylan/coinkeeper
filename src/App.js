@@ -197,11 +197,7 @@ function App() {
                                             deleteIncomeSource={deleteIncomeSource}
                                             editIncomeSource={editIncomeSource} incomeTransactions={getIncomeTransactions()}/>
                             </div>
-                            <div className={styles.accountList}>
-                                <AccountList accountList={user.accountList} addAccount={addAccount}
-                                            deleteAccount={deleteAccount}
-                                            editAccount={editAccount} transactionList={user.transactionList}/>
-                            </div>
+        
                             <div className={styles.expenseList}>
                                 <ExpenseTypeList expenseTypeList={user.expenseTypeList} editExpenseType={editExpenseType}
                                                 deleteExpenseType={deleteExpenseType} addExpenseType={addExpenseType}
@@ -210,6 +206,11 @@ function App() {
                         </div>
                     </div>
                     <div className={styles.transactionList}>
+                        <div className={styles.accountList}>
+                                    <AccountList accountList={user.accountList} addAccount={addAccount}
+                                                deleteAccount={deleteAccount}
+                                                editAccount={editAccount} transactionList={user.transactionList}/>
+                        </div>
                         <div className={styles.transactionListDiv}>
                             <TransactionList transactions={user.transactionList} addTransaction={addTransaction}
                                             deleteTransaction={deleteTransaction} editTransaction={editTransaction}

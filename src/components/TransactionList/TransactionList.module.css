@@ -1,0 +1,27 @@
+.transactionList{
+    padding: 10px;
+}
+
+.createTransaction{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+    font-size: 17px;
+}
+
+.createButtons button{
+    margin-right: 10px;
+}
+
+.createFrom label{
+    display: flex;
+    gap: 15px;
+}
+
+.createFrom input {
+    border-radius: 5px;
+    border: 1px solid black;
+    padding: 3px 10px;
+}

@@ -1,4 +1,6 @@
 import {useState} from "react";
+import styles from './ExpenseTypeItem.module.css';
+import { Button } from "react-bootstrap";
 
 const EditExpenseTypeItem = ({active, setActive, editExpenseType, expenseType, deleteExpenseType}) => {
     const [titleInput, setTitleInput] = useState(expenseType.title);
@@ -32,15 +34,21 @@ const EditExpenseTypeItem = ({active, setActive, editExpenseType, expenseType, d
     }
     return (
         <form hidden={!active}>
-            <input style={titleInputStyle} type={"text"} value={titleInput}
-                   onChange={e => setTitleInput(e.currentTarget.value)}
-                   placeholder="What for do your spend money?"/>
-            {alertMode ? <span>Required field</span> : ''}
-            <input type={"number"} value={spendPlan} onChange={e => setSpendPlan(e.currentTarget.value)}
-                   placeholder="Planning to spend per month"/>
-            <button onClick={handleSubmit}>SAVE</button>
-            <button onClick={handleCancel}>CANCEL</button>
-            <button onClick={handleDelete}>DELETE</button>
+            <div className={styles.editExpenseDiv}>
+                <div className={styles.editExpenseInputs}>
+                    <input style={titleInputStyle} type={"text"} value={titleInput}
+                        onChange={e => setTitleInput(e.currentTarget.value)}
+                        placeholder="What for do your spend money?"/>
+                    {alertMode ? <span>Required field</span> : ''}
+                    <input type={"number"} value={spendPlan} onChange={e => setSpendPlan(e.currentTarget.value)}
+                        placeholder="Planning to spend per month"/>
+                </div>
+                <div className={styles.editExpenseButtons}>
+                    <Button variant="outline-dark" size="sm" onClick={handleSubmit}>SAVE</Button>
+                    <Button variant="outline-dark" size="sm" onClick={handleCancel}>CANCEL</Button>
+                    <Button variant="outline-dark" size="sm" onClick={handleDelete}>DELETE</Button>
+                </div>
+            </div>
         </form>
     )
 }

@@ -3,6 +3,8 @@ import TransactionItem from "./TransactionItem/TransactionItem";
 import CreateTransactionModal from "./CreateTransaction";
 import {parseMonthDate} from "../../data/models/UtilCreateFuncitons";
 import TransactionType from "../../data/models/TransactionType";
+import { Button } from "react-bootstrap";
+import styles from './TransactionList.module.css';
 
 const TransactionList = ({
                              transactions,
@@ -36,8 +38,8 @@ const TransactionList = ({
     }
 
     return (
-        <div>
-            <button onClick={() => setCreateMode(true)}>Create Transaction</button>
+        <div className={styles.transactionList}>
+            <Button onClick={() => setCreateMode(true)}>Create Transaction</Button>
             {(() => {
                 if (isCreateMode === true) return <CreateTransactionModal
                     setActive={setCreateMode} incomeSourceList={incomeSourceList} accountList={accountList}

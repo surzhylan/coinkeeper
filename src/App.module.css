@@ -27,7 +27,7 @@
 
 /* Account */
 .accountList{
-    margin-top: 40px;
+    margin-top: 30px;
     border: 2px solid purple;
     width: 95%;
 }
@@ -36,7 +36,7 @@
 .transactionList{
     border: 1px solid red;
     margin-top: 10px;
-    padding-left: 15px;
+    padding-left: 30px;
     padding-right: 15px;
     width: 50%;
 }
@@ -44,6 +44,7 @@
 .transactionListDiv{
     border: 2px solid black;
     width: 95%;
+    margin-top: 40px;
 }
 
 .expenseList{
