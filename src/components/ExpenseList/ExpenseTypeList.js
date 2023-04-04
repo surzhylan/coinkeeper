@@ -4,7 +4,7 @@ import CreateExpenseType from "./CreateExpenseType";
 import ExpenseTypeItem from "./ExpenseItem/ExpenseTypeItem";
 import styles from './ExpenseTypeList.module.css';
 
-
+//Todo: getTotalSpent should have filter transaction by current month
 const ExpenseTypeList = ({expenseTypeList, addExpenseType, editExpenseType, deleteExpenseType, transactions,}) => {
     const [isCreateMode, setCreateMode] = useState(false)
 

@@ -14,6 +14,7 @@ import {
 } from "./data/models/UtilCreateFuncitons";
 import ExpenseTypeList from "./components/ExpenseList/ExpenseTypeList";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import StatisticComponent from "./components/StatisticComponent/StatisticComponent";
 
 //Todo: Ограничение на траты (на день)
 //Todo: When deleting income source or account must be two options with saving history or not
@@ -187,7 +188,7 @@ function App() {
                     {/*Login and Registration*/}
                 </div>
                 : <div className={styles.bodyDivFlex}>
-                        <div className={styles.mainDiv}>
+                    <div className={styles.mainDiv}>
                         <div className={styles.maindiv1}>
                             <div className={styles.mainDivText}>
                                 <h5>{parseMonthDate(new Date())}</h5>
@@ -195,31 +196,39 @@ function App() {
                             <div className={styles.incomeDiv}>
                                 <IncomeList incomeSourceList={user.incomeSourceList} addIncome={addIncomeSource}
                                             deleteIncomeSource={deleteIncomeSource}
-                                            editIncomeSource={editIncomeSource} incomeTransactions={getIncomeTransactions()}/>
+                                            editIncomeSource={editIncomeSource}
+                                            incomeTransactions={getIncomeTransactions()}/>
                             </div>
-        
+
                             <div className={styles.expenseList}>
-                                <ExpenseTypeList expenseTypeList={user.expenseTypeList} editExpenseType={editExpenseType}
-                                                deleteExpenseType={deleteExpenseType} addExpenseType={addExpenseType}
-                        transactions={getOutcomeTransactions()}/>
+                                <ExpenseTypeList expenseTypeList={user.expenseTypeList}
+                                                 editExpenseType={editExpenseType}
+                                                 deleteExpenseType={deleteExpenseType} addExpenseType={addExpenseType}
+                                                 transactions={getOutcomeTransactions()}/>
                             </div>
                         </div>
                     </div>
                     <div className={styles.transactionList}>
                         <div className={styles.accountList}>
-                                    <AccountList accountList={user.accountList} addAccount={addAccount}
-                                                deleteAccount={deleteAccount}
-                                                editAccount={editAccount} transactionList={user.transactionList}/>
+                            <AccountList accountList={user.accountList} addAccount={addAccount}
+                                         deleteAccount={deleteAccount}
+                                         editAccount={editAccount} transactionList={user.transactionList}/>
                         </div>
                         <div className={styles.transactionListDiv}>
                             <TransactionList transactions={user.transactionList} addTransaction={addTransaction}
-                                            deleteTransaction={deleteTransaction} editTransaction={editTransaction}
-                                            accountList={user.accountList} incomeSourceList={user.incomeSourceList}
-                                            expenseTypeList={user.expenseTypeList}/>
+                                             deleteTransaction={deleteTransaction} editTransaction={editTransaction}
+                                             accountList={user.accountList} incomeSourceList={user.incomeSourceList}
+                                             expenseTypeList={user.expenseTypeList}/>
                         </div>
                     </div>
+
+                    <div>
+                        <StatisticComponent incomeSourceList={user.incomeSourceList} accountList={user.accountList}
+                                            transactionList={user.transactionList}
+                                            expenseTypeList={user.expenseTypeList}/>
+                    </div>
                 </div>
-                }
+            }
         </div>
     )
 }

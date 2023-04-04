@@ -2,7 +2,7 @@ import {useState} from "react";
 import { Button } from "react-bootstrap";
 import styles from './IncomeItem.module.css';
 
-const EditIncomeSourceModal = ({active, setActive, editIncomeSource, incomeSource, deleteIncomeSource}) => {
+const EditIncomeSourceModal = ({setActive, editIncomeSource, incomeSource, deleteIncomeSource}) => {
     const [titleInput, setTitleInput] = useState(incomeSource.title);
     const [incomeInput, setIncomeInput] = useState(incomeSource.plannedIncome);
     const [alertMode, setAlertMode] = useState(false)
@@ -33,7 +33,7 @@ const EditIncomeSourceModal = ({active, setActive, editIncomeSource, incomeSourc
         cleanUserInput();
     }
     return (
-        <form hidden={!active}>
+        <form>
             <div className={styles.editIncomeDiv}>
                 <div className={styles.editIncomeInputs}>
                     <input style={titleInputStyle} type={"text"} value={titleInput}

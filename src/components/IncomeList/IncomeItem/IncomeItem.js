@@ -12,14 +12,16 @@ const IncomeItem = ({incomeSource, transactions, editIncomeSource, deleteIncomeS
     }
 
     return (
-        <div style={{border: "solid 1px yellow"}} className={styles.incomeItem1Div}>
+        <div style={{border: "solid 1px yellow", display: "inline"}} className={styles.incomeItem1Div}>
             <div onClick={() => setEditMode(true)}>
                 <div className={styles.incomeItem1}>
                     <div className={styles.title}>
                         <h5>{incomeSource.title}</h5>
                     </div>
                     <div className={styles.imageItem}>
-                        {incomeSource.title === 'Salary' ? <img src="salaryicon.png"></img> : (incomeSource.title === 'Freelance' ? <img src="freelanceicon.png"></img> : <img src="othericon.png"></img>)}
+                        {incomeSource.title === 'Salary' ?
+                            <img src="salaryicon.png"></img> : (incomeSource.title === 'Freelance' ?
+                                <img src="freelanceicon.png"></img> : <img src="othericon.png"></img>)}
                     </div>
                     <div className={styles.amount}>
                         {incomeSource.plannedIncome === ''
@@ -51,7 +53,6 @@ const IncomeItem = ({incomeSource, transactions, editIncomeSource, deleteIncomeS
                                                                        editIncomeSource={editIncomeSource}
                                                                        deleteIncomeSource={deleteIncomeSource}/>
             })()}
-
         </div>
     )
 }

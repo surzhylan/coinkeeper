@@ -125,6 +125,17 @@ export function parseMonthDate(date) {
     return month + " " + date.getDate()
 }
 
+export function parseMonth(date) {
+    let month = date.toLocaleString('default', {month: 'short'})
+    return month.charAt(0).toUpperCase() + month.slice(1);
+}
+
+export function parseLocalMonth(monthNumber) {
+    const date = new Date();
+    date.setMonth(monthNumber);
+    let month = date.toLocaleString('default', {month: 'short'})
+    return month.charAt(0).toUpperCase() + month.slice(1);
+}
 
 export function getTransactionType(source, destination) {
     if (isIncomeSource(source) && isAccount(destination)) return TransactionType.Income
@@ -132,6 +143,76 @@ export function getTransactionType(source, destination) {
     if (isAccount(source) && isExpenseType(destination)) return TransactionType.Outcome
     else throw Error('Could not determine transaction type')
     //Todo: Add Outcome
+}
+
+export function getTransactionsDays(transactions) {
+    let dateList = transactions.map(t => new Date(t.date))
+    let updatedDateList = []
+    for (let date of dateList) {
+        if (updatedDateList.findIndex(d => d.setHours(0, 0, 0,) === date.setHours(0, 0, 0, 0)) === -1) updatedDateList.push(date)
+    }
+    return updatedDateList || []
+}
+
+export function getTransactionsMonths(transactions) {
+    let transactionDateList = transactions.map(t => t.date)
+    let updatedMonthsList = []
+    for (let date of transactionDateList) {
+        if (updatedMonthsList.length === 0) updatedMonthsList.push({
+            month: date.getMonth(),
+            year: date.getFullYear()
+        })
+        else {
+            if (updatedMonthsList.findIndex(d => date.getMonth() === d.month && date.getFullYear() === d.year) === -1)
+                updatedMonthsList.push({
+                    month: date.getMonth(),
+                    year: date.getFullYear()
+                })
+        }
+    }
+    updatedMonthsList.sort((a, b) =>
+        (a.year === b.year) ? a.month - b.month
+            : a.year - b.year
+    )
+
+    return updatedMonthsList || []
+}
+
+// export function getTransactionsTotalByMonths(transactions, monthYear) {
+//     let result = 0;
+//     transactions.forEach(t => {
+//             if (parseMonth(t.date) === monthYear.month
+//                 && t.date.getFullYear() === monthYear.year) {
+//                 if (t.type === TransactionType.Outcome) result -= t.amount
+//                 else if (t.type === TransactionType.Income) result += t.amount
+//             }
+//         }
+//     )
+//     return result
+// }
+
+export function getTransactionTotalIncomeByMonths(transactions, monthYear) {
+    let result = 0;
+    transactions.forEach(t => {
+            if (t.type === TransactionType.Income
+                && t.date.getMonth() === monthYear.month
+                && t.date.getFullYear() === monthYear.year)
+                result += t.amount
+        }
+    )
+    return result
+}
+
+export function getTransactionTotalOutcomeByMonths(transactions, monthYear) {
+    let result = 0;
+    transactions.forEach(t => {
+            if (t.type === TransactionType.Outcome
+                && t.date.getMonth() === monthYear.month
+                && t.date.getFullYear() === monthYear.year)
+                result += t.amount
+        }
+    )
+    return result
 }
 
 //Expense operations

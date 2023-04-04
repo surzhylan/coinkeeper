@@ -1,9 +1,9 @@
 import {useState} from "react";
 import TransactionItem from "./TransactionItem/TransactionItem";
 import CreateTransactionModal from "./CreateTransaction";
-import {parseMonthDate} from "../../data/models/UtilCreateFuncitons";
+import {getTransactionsDays, parseMonthDate} from "../../data/models/UtilCreateFuncitons";
 import TransactionType from "../../data/models/TransactionType";
-import { Button } from "react-bootstrap";
+import {Button} from "react-bootstrap";
 import styles from './TransactionList.module.css';
 
 const TransactionList = ({
@@ -13,15 +13,6 @@ const TransactionList = ({
                              editTransaction, incomeSourceList, accountList, expenseTypeList
                          }) => {
     const [isCreateMode, setCreateMode] = useState(false)
-
-    function getDateList() {
-        let dateList = transactions.map(t => new Date(t.date))
-        let updatedDateList = []
-        for (let date of dateList) {
-            if (updatedDateList.findIndex(d => d.setHours(0, 0, 0,) === date.setHours(0, 0, 0, 0)) === -1) updatedDateList.push(date)
-        }
-        return updatedDateList || []
-    }
 
     function getTransactionsByDate(date: Date) {
         return transactions.filter(t => {
@@ -45,7 +36,7 @@ const TransactionList = ({
                     setActive={setCreateMode} incomeSourceList={incomeSourceList} accountList={accountList}
                     addTransaction={addTransaction} expenseTypeList={expenseTypeList}/>
             })()}
-            {getDateList().map(d =>
+            {getTransactionsDays(transactions).map(d =>
                 <div key={d}>
                     <h4>{parseMonthDate(d)}</h4>
                     <div>
