@@ -25,6 +25,10 @@
     width: 95%;
 }
 
+.incomeDiv:active, .incomeDiv:focus {
+    transform: scaleY(1,5);
+}
+
 
 /* Account */
 .accountList{

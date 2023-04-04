@@ -35,6 +35,9 @@ const EditExpenseTypeItem = ({active, setActive, editExpenseType, expenseType, d
     return (
         <form hidden={!active}>
             <div className={styles.editExpenseDiv}>
+                <div className={styles.editExpenseLabel}>
+                    <label>Do you want to edit expense?</label>
+                </div>
                 <div className={styles.editExpenseInputs}>
                     <input style={titleInputStyle} type={"text"} value={titleInput}
                         onChange={e => setTitleInput(e.currentTarget.value)}
@@ -44,9 +47,9 @@ const EditExpenseTypeItem = ({active, setActive, editExpenseType, expenseType, d
                         placeholder="Planning to spend per month"/>
                 </div>
                 <div className={styles.editExpenseButtons}>
-                    <Button variant="outline-dark" size="sm" onClick={handleSubmit}>SAVE</Button>
-                    <Button variant="outline-dark" size="sm" onClick={handleCancel}>CANCEL</Button>
-                    <Button variant="outline-dark" size="sm" onClick={handleDelete}>DELETE</Button>
+                    <Button variant="dark" size="sm" onClick={handleSubmit}>SAVE</Button>
+                    <Button variant="dark" size="sm" onClick={handleCancel}>CANCEL</Button>
+                    <Button variant="dark" size="sm" onClick={handleDelete}>DELETE</Button>
                 </div>
             </div>
         </form>

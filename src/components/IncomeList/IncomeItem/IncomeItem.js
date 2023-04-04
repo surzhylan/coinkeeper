@@ -11,8 +11,11 @@ const IncomeItem = ({incomeSource, transactions, editIncomeSource, deleteIncomeS
         return isNaN(total) ? 0 : total
     }
 
+    //const background = (isEditMode === false) ? {backgroundColor: "rgb(192,192,192);",opacity:"0.6;"} : {backgroundColor:"rgb(192,192,192);",opacity:"1;"}
+
     return (
-        <div style={{border: "solid 1px yellow"}} className={styles.incomeItem1Div}>
+        <div /*style={background}*/>
+            <div style={{border: "solid 1px yellow"}} className={styles.incomeItem1Div}>
             <div onClick={() => setEditMode(true)}>
                 <div className={styles.incomeItem1}>
                     <div className={styles.title}>
@@ -45,13 +48,16 @@ const IncomeItem = ({incomeSource, transactions, editIncomeSource, deleteIncomeS
                 </div>
             </div>
             {(() => {
-                if (isEditMode === true) return <EditIncomeSourceModal active={isEditMode}
+                if (isEditMode === true) return <div className={styles.editIncome}>
+                    <EditIncomeSourceModal active={isEditMode}
                                                                        setActive={setEditMode}
                                                                        incomeSource={incomeSource}
                                                                        editIncomeSource={editIncomeSource}
                                                                        deleteIncomeSource={deleteIncomeSource}/>
+                </div>
             })()}
 
+        </div>
         </div>
     )
 }

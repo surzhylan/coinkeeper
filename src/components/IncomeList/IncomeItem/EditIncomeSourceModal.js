@@ -33,23 +33,28 @@ const EditIncomeSourceModal = ({active, setActive, editIncomeSource, incomeSourc
         cleanUserInput();
     }
     return (
-        <form hidden={!active}>
-            <div className={styles.editIncomeDiv}>
-                <div className={styles.editIncomeInputs}>
-                    <input style={titleInputStyle} type={"text"} value={titleInput}
-                        onChange={e => setTitleInput(e.currentTarget.value)}
-                        placeholder="What is your income?"/>
-                    {alertMode ? <span>Required field</span> : ''}
-                    <input type={"number"} value={incomeInput} onChange={e => setIncomeInput(e.currentTarget.value)}
-                        placeholder="How much is income per month?"/>
+        <div className={styles.editIncome}>
+            <form hidden={!active}>
+                <div className={styles.editIncomeDiv}>
+                    <div className={styles.editIncomeLabel}>
+                        <label>Do you want to edit income?</label>
+                    </div>
+                    <div className={styles.editIncomeInputs}>
+                        <input style={titleInputStyle} type={"text"} value={titleInput}
+                            onChange={e => setTitleInput(e.currentTarget.value)}
+                            placeholder="What is your income?"/>
+                        {alertMode ? <span>Required field</span> : ''}
+                        <input type={"number"} value={incomeInput} onChange={e => setIncomeInput(e.currentTarget.value)}
+                            placeholder="How much is income per month?"/>
+                    </div>
+                    <div className={styles.editIncomeButtons}>
+                        <Button variant="dark" size="sm" onClick={handleSubmit}>SAVE</Button>
+                        <Button variant="dark" size="sm" onClick={handleCancel}>CANCEL</Button>
+                        <Button variant="dark" size="sm" onClick={handleDelete}>DELETE</Button>
+                    </div>
                 </div>
-                <div className={styles.editIncomeButtons}>
-                    <Button variant="outline-dark" size="sm" onClick={handleSubmit}>SAVE</Button>
-                    <Button variant="outline-dark" size="sm" onClick={handleCancel}>CANCEL</Button>
-                    <Button variant="outline-dark" size="sm" onClick={handleDelete}>DELETE</Button>
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
     )
 }
 

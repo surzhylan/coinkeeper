@@ -30,6 +30,10 @@
     background-color: rgba(128, 128, 128, 0.121);
 }
 
+.incomeItemDiv:active, .incomeItemDiv:focus {
+    transform: scaleY(1,5);
+}
+
 .incomeItem{
     border: 2px solid red;
     width: 30%;

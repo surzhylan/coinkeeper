@@ -36,6 +36,9 @@ const EditAccountModal = ({setActive, editAccount, account, deleteAccount, accou
     return (
         <form>
             <div className={styles.editIncomeDiv}>
+                <div className={styles.editIncomeLabel}>
+                    <label>Do you want to edit account?</label>
+                </div>
                 <div className={styles.editIncomeInputs}>
                     <input style={titleInputStyle} type={"text"} value={titleInput}
                         onChange={e => setTitleInput(e.currentTarget.value)}
@@ -45,9 +48,9 @@ const EditAccountModal = ({setActive, editAccount, account, deleteAccount, accou
                         placeholder="How much is there?"/>
                 </div>
                 <div className={styles.editIncomeButtons}>
-                    <Button variant="outline-dark" size="sm" onClick={handleSubmit}>SAVE</Button>
-                    <Button variant="outline-dark" size="sm" onClick={handleCancel}>CANCEL</Button>
-                    <Button variant="outline-dark" size="sm" onClick={handleDelete}>DELETE</Button>
+                    <Button variant="dark" size="sm" onClick={handleSubmit}>SAVE</Button>
+                    <Button variant="dark" size="sm" onClick={handleCancel}>CANCEL</Button>
+                    <Button variant="dark" size="sm" onClick={handleDelete}>DELETE</Button>
                 </div>
             </div>
         </form>

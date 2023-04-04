@@ -44,10 +44,28 @@
 }
 
 .editExpenseDiv{
-    width: 100%;
+    /*width: 100%;
     border: 2px solid black;
     display: flex;
+    flex-direction: column;*/
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 300px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0px 5px 10px rgb(0, 0, 0);
+    padding: 30px;
+    display: flex;
     flex-direction: column;
+    gap: 20px;
+}
+
+.editExpenseLabel{
+    font-size:19px;
+    font-weight: 500;
 }
 
 .editExpenseInputs input{
