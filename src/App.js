@@ -15,9 +15,8 @@ import {
 import ExpenseTypeList from "./components/ExpenseList/ExpenseTypeList";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-//Todo: Ограничение на траты (на день)
 //Todo: When deleting income source or account must be two options with saving history or not
-//Todo: график и
+//Todo: When clicking outside modal window it should be closed
 //Todo: Refactor to Typescript and MVVM
 //Todo: User login, registration
 function App() {
