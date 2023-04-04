@@ -1,7 +1,8 @@
 .bodyDiv{
     margin-left: 20px;
     margin-right: 20px;
-    background-image: url(https://img.freepik.com/free-vector/simple-gradient-background-vector-in-winter-blue-and-pink_53876-105768.jpg?w=2000&t=st=1680447746~exp=1680448346~hmac=8e4c7a4cc5850ca6861bfc415b51529133ca15fed73d82192170166ff228a3b9);
+    /*background-image: url(https://img.freepik.com/free-vector/simple-gradient-background-vector-in-winter-blue-and-pink_53876-105768.jpg?w=2000&t=st=1680447746~exp=1680448346~hmac=8e4c7a4cc5850ca6861bfc415b51529133ca15fed73d82192170166ff228a3b9);*/
+    background-image: url(/public/beige-tiles.png);
 }
 
 .bodyDivFlex{
@@ -11,7 +12,7 @@
 .mainDiv{
     border: 1px solid red;
     margin-top: 10px;
-    padding-left: 15px;
+    padding-left: 30px;
     padding-right: 15px;
     width: 50%;
 }
@@ -21,8 +22,10 @@
 }
 
 .incomeDiv{
-    border: 2px solid black;
+    /*border: 2px solid black;*/
     width: 95%;
+    border-radius: 5px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.771);
 }
 
 .incomeDiv:active, .incomeDiv:focus {
@@ -33,16 +36,18 @@
 /* Account */
 .accountList{
     margin-top: 30px;
-    border: 2px solid purple;
+    /*border: 2px solid purple;*/
     width: 95%;
+    border-radius: 5px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.771);
 }
 
 
 .transactionList{
     border: 1px solid red;
     margin-top: 10px;
-    padding-left: 30px;
-    padding-right: 15px;
+    padding-left: 35px;
+    padding-right: 5px;
     width: 50%;
 }
 
@@ -50,10 +55,20 @@
     border: 2px solid black;
     width: 95%;
     margin-top: 40px;
+    border-radius: 5px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.771);
 }
 
 .expenseList{
-    border: 2px solid black;
+    /*border: 2px solid black;*/
     width: 95%;
     margin-top: 40px;
+    border-radius: 5px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.771);
+}
+
+.statisticComponentDiv{
+    width: 100%;
+    border: 1px solid greenyellow;
+    margin-top: 30px;
 }

@@ -14,6 +14,7 @@ import {
     getTransactionsMonths,
     getTransactionTotalIncomeByMonths, getTransactionTotalOutcomeByMonths, parseLocalMonth
 } from "../../../data/models/UtilCreateFuncitons";
+import styles from '../StatisticComponent.module.css';
 
 ChartJS.register(
     CategoryScale,
@@ -56,10 +57,12 @@ const MoneyFlowTrend = ({transactions}) => {
     })
 
     return (
-        <div>
-            <h5>Cash flow trend</h5>
-            <p>By months</p>
-            <div style={{height: "400px"}}>
+        <div className={styles.moneyItemDiv}>
+           <div className={styles.moneyTitles}>
+                <h5>Cash flow trend</h5>
+                <p className={styles.moneyTitle1}>By months</p>
+           </div>
+            <div style={{height: "400px"}} className={styles.moneyChart}>
                 <Line options={options} data={data}/>
             </div>
         </div>

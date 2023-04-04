@@ -3,6 +3,7 @@ import {useState} from "react";
 import {Pie} from "react-chartjs-2";
 import {Chart as ChartJS, ArcElement, Tooltip, Legend} from 'chart.js';
 import {getColors} from "../../../data/models/StatisticUtil";
+import styles from '../StatisticComponent.module.css';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -37,13 +38,13 @@ const OutcomesByCategoriesComponent = ({transactionList, expenseTypeList}) => {
     }
 
     return (
-        <div>
-            <div>
+        <div className={styles.outcomeItemDiv}>
+            <div className={styles.outcomeTitles}>
                 <h5>Outcomes by categories</h5>
-                <p>Where my money goes?</p>
+                <p className={styles.outcomeTitle1}>Where my money goes?</p>
                 <p>For last month: {getTotalAmount()}</p>
             </div>
-            <div>
+            <div className={styles.outcomeChart}>
                 <Pie
                     data={chartData}
                 />

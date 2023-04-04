@@ -1,11 +1,21 @@
 .navbar{
-    background-color: antiquewhite;
+    background-color: #61959e;
     height: 70px;
     display: flex;
     gap: 20px;
     align-items: center;
     padding: 10px;
     border: 1px solid black;
+    justify-content: space-between;
+    color: aliceblue;
+    font-weight: 500;
+}
+
+.navbarText{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    padding-left: 5px;
 }
 
 .logoImg img{
@@ -14,5 +24,27 @@
 }
 
 .logoText h3{
-    font-size: 20px;
+    font-size: 22px;
+    margin-bottom: 0;
+}
+
+.menu ul{
+    list-style-type: none;
+    overflow: hidden;
+    background-color: #61959e;
+    margin: 0;
+    padding: 0;
+}
+
+.menu ul li {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 21px 16px;
+    text-decoration: none;
+}
+
+li:hover {
+    background-color: #4e767e;
 }

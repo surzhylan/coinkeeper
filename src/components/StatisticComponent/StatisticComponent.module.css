@@ -1,0 +1,121 @@
+.statisticDiv{
+    display: flex;
+    padding: 20px;
+    gap: 50px;
+    height: 50%;
+}
+
+.outcomeDiv{
+    width: 33%;
+    border: 1px solid black;
+}
+
+.moneyFlowDiv{
+    width: 33%;
+    border: 1px solid black;
+}
+
+.balanceForecastDiv{
+    width: 33%;
+    border: 1px solid black;
+}
+
+/* Outcome */
+.outcomeItemDiv{
+    border: 1px solid red;
+    max-width: 100%;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px;
+}
+
+.outcomeTitles{
+    height: 100px;
+}
+
+.outcomeTitles h5{
+    font-size: x-large;
+}
+
+.outcomeTitles p{
+    font-size:17px;
+    font-weight: 500;
+}
+
+.outcomeTitle1 {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.outcomeChart{
+    height: 330px;
+}
+
+/* Balance */
+.balanceItemDiv{
+    border: 1px solid red;
+    max-width: 100%;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+}
+
+.balanceTitles{
+    height: 70px;
+}
+
+.balanceTitles h5{
+    font-size: x-large;
+}
+
+.balanceTitles p{
+    font-size:17px;
+    font-weight: 500;
+}
+
+.balanceTitle1 {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.balanceChart{
+    height: 330px;
+}
+
+
+/* Money Flow  */
+.moneyItemDiv{
+    border: 1px solid red;
+    max-width: 100%;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+}
+
+.moneyTitles{
+    height: 70px;
+}
+
+.moneyTitles h5{
+    font-size: x-large;
+}
+
+.moneyTitles p{
+    font-size:17px;
+    font-weight: 500;
+}
+
+.moneyTitle1 {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.moneyChart{
+    height: 330px;
+}

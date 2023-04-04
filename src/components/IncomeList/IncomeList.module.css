@@ -1,5 +1,5 @@
 .incomeTitle{
-    background-color: antiquewhite;
+    background-color: #94c7c0;   /*#94c7c0*/
     display: flex;
     text-align: center;
     height: 70px;
@@ -8,6 +8,8 @@
     gap: 15px;
     position: inherit;
     justify-content: space-between;
+    color: #153c3f;
+    border-radius: 5px;
 }
 
 .title{
@@ -35,7 +37,7 @@
 }
 
 .incomeItem{
-    border: 2px solid red;
+    /*border: 2px solid red;*/
     width: 30%;
     padding: 0;
     margin: 0;

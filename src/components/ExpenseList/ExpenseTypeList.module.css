@@ -1,5 +1,5 @@
 .expenseTitle{
-    background-color: antiquewhite;
+    background-color: #94c7c0;
     display: flex;
     text-align: center;
     height: 70px;
@@ -8,6 +8,8 @@
     gap: 15px;
     position: inherit;
     justify-content: space-between;
+    color: #153c3f;
+    border-radius: 5px;
 }
 
 .title{
@@ -26,7 +28,7 @@
 .expenseItemDiv{
     display: flex;
     gap: 20px;
-    height: 430px;
+    height: 530px;
     background-color: rgba(128, 128, 128, 0.121);
     flex-wrap: wrap;
     padding: 10px;

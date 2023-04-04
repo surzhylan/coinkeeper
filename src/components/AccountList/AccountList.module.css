@@ -1,5 +1,5 @@
 .accountList{
-    background-color: antiquewhite;
+    background-color: #94c7c0;
     display: flex;
     text-align: center;
     height: 70px;
@@ -9,6 +9,8 @@
     position: inherit;
     justify-content: space-between;
     max-width: 100%;
+    color: #153c3f;
+    border-radius: 5px;
 }
 
 .accountTitle{

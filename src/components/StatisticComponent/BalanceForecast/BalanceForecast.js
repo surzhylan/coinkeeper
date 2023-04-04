@@ -9,6 +9,7 @@ import {
     Legend,
 } from 'chart.js';
 import {Bar} from 'react-chartjs-2';
+import styles from '../StatisticComponent.module.css';
 
 ChartJS.register(
     CategoryScale,
@@ -70,10 +71,12 @@ const BalanceForecast = ({incomeSourceList, expenseTypeList, totalCurrentBalance
     }
 
     return (
-        <div>
-            <h5>Balance Forecast</h5>
-            <p>By next {period} months</p>
-            <div style={{height: "400px"}}>
+        <div className={styles.balanceItemDiv}>
+            <div className={styles.balanceTitles}>
+                <h5>Balance Forecast</h5>
+                <p className={styles.balanceTitle1}>By next {period} months</p>
+            </div>
+            <div style={{height: "400px"}} className={styles.balanceChart}>
                 <Bar options={options} data={data}/>
             </div>
         </div>
