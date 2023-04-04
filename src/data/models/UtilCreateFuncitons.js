@@ -78,6 +78,25 @@ export function createAccount(title, initialBalance) {
     }
 }
 
+export function getTotalCurrentBalance(accountList, transactionList) {
+    return accountList.reduce((sum, a) => {
+        let transactionAmount = transactionList.reduce((tSum, t) => {
+            if (t.type === TransactionType.Income && t.destination.id === a.id) return tSum + t.amount
+            if (t.type === TransactionType.Outcome && t.destination.source === a.id) return tSum - t.amount
+            else return tSum
+        }, 0)
+        return sum + transactionAmount
+    }, 0)
+}
+
+export function getAccountCurrentBalance(account, transactionList) {
+    let transactionAmount = transactionList.reduce((tSum, t) => {
+        if (t.type === TransactionType.Income && t.destination.id === account.id) return tSum + t.amount
+        if (t.type === TransactionType.Outcome && t.destination.source === account.id) return tSum - t.amount
+        else return tSum
+    }, 0)
+    return Number(account.initialBalance) + transactionAmount
+}
 export function isAccount(account) {
     return account.hasOwnProperty('initialBalance')
 }

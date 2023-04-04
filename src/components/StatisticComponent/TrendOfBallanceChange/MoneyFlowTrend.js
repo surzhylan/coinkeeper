@@ -9,7 +9,7 @@ import {
     Tooltip,
     Legend,
 } from 'chart.js';
-import {Line} from 'react-chartjs-2';
+import {Bar, Line} from 'react-chartjs-2';
 import {
     getTransactionsMonths,
     getTransactionTotalIncomeByMonths, getTransactionTotalOutcomeByMonths, parseLocalMonth
@@ -31,11 +31,8 @@ const options = {
         legend: {
             position: 'top',
         },
-        title: {
-            display: true,
-            text: 'Chart.js Line Chart',
-        },
     },
+    maintainAspectRatio: false,
 };
 
 const MoneyFlowTrend = ({transactions}) => {
@@ -60,10 +57,11 @@ const MoneyFlowTrend = ({transactions}) => {
 
     return (
         <div>
-            {console.log(getTransactionsMonths(transactions))}
             <h5>Cash flow trend</h5>
             <p>By months</p>
-            <Line options={options} data={data}/>
+            <div style={{height: "400px"}}>
+                <Line options={options} data={data}/>
+            </div>
         </div>
     )
 }
