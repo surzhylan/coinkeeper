@@ -8,21 +8,27 @@
 .outcomeDiv{
     width: 33%;
     border: 1px solid black;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.555);
+    border-radius: 5px;
 }
 
 .moneyFlowDiv{
     width: 33%;
     border: 1px solid black;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.555);
+    border-radius: 5px;
 }
 
 .balanceForecastDiv{
     width: 33%;
     border: 1px solid black;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.555);
+    border-radius: 5px;
 }
 
 /* Outcome */
 .outcomeItemDiv{
-    border: 1px solid red;
+    /*border: 1px solid red;*/
     max-width: 100%;
     max-height: 100%;
     display: flex;
@@ -55,7 +61,7 @@
 
 /* Balance */
 .balanceItemDiv{
-    border: 1px solid red;
+    /*border: 1px solid red;*/
     max-width: 100%;
     max-height: 100%;
     display: flex;
@@ -89,7 +95,7 @@
 
 /* Money Flow  */
 .moneyItemDiv{
-    border: 1px solid red;
+    /*border: 1px solid red;*/
     max-width: 100%;
     max-height: 100%;
     display: flex;

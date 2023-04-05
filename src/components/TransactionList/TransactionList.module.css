@@ -1,5 +1,27 @@
 .transactionList{
     padding: 10px;
+    margin-top: 10px;
+}
+
+.transactionTitles{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+}
+
+.transactionTitles button{
+    background-color: #61959e;
+}
+
+.transactionTitles h5{
+    font-size: 23px;
+    font-weight: 500;
+    color: #427fc7;
+}
+
+.transactionListTitle{
+    margin-top: 15px;
 }
 
 .createTransaction{
@@ -9,10 +31,19 @@
     gap: 10px;
     margin-bottom: 20px;
     font-size: 17px;
+    background-color: #94c7c065;
+    padding: 20px;
+    border-radius: 5px;
+    font-weight: 500;
+}
+
+.createButtons{
+    margin-left: 10px;
 }
 
 .createButtons button{
     margin-right: 10px;
+    
 }
 
 .createFrom label{
@@ -24,4 +55,98 @@
     border-radius: 5px;
     border: 1px solid black;
     padding: 3px 10px;
+}
+
+.totalTransaction{
+    margin-bottom: 10px;
+}
+
+.totalTransaction span{
+    font-size: 18px;
+    font-weight: 500;
+}
+/* ------------------------------------------- */
+
+.transactionMain{
+    margin-bottom: 15px;
+}
+
+.transactionDiv{
+    display: flex;
+    background-color: #94c7c065;
+    gap: 10px;
+    box-shadow: 0px 5px 10px rgba(207, 207, 47, 0.494);
+    border-radius: 5px;
+}
+
+.transactionItemDiv{
+    width: 27%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: rgb(18, 76, 162);
+    font-weight: 500;
+    border-radius: 5px;
+}
+
+.transactionItemDiv p{
+    margin-bottom: 0;
+    font-size: 17px;
+    font-weight: 500;
+    color: black;
+}
+
+.transactionItemTitle1 p{
+    color: rgb(132, 148, 61);
+}
+
+.transactionItemTitle2 p{
+    color: #b83a4a;
+}
+
+
+/* edit */
+
+.editFromTo{
+    display: flex;
+    gap: 20px;
+}
+
+.dateflex{
+    display: flex;
+   /*gap: 10px;*/
+    align-items: center;
+}
+
+.editFrom select{
+    margin-left: 10px;
+    width: 150px;
+    padding: 5px 10px;
+}
+
+.editForm{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 17px;
+    color: rgb(45, 76, 149);
+    font-weight: 500;
+}
+
+.editFrom input{
+    padding: 0 10px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    margin-left: 10px;
+}
+
+.editFormButtons {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.editFormButtons button{
+    margin-right: 10px;
 }

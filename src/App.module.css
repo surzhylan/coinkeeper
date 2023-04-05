@@ -10,15 +10,18 @@
 }
 
 .mainDiv{
-    border: 1px solid red;
+    /*border: 1px solid red;*/
     margin-top: 10px;
     padding-left: 30px;
     padding-right: 15px;
     width: 50%;
 }
 
-.mainDivText{
+.mainDivText h5{
     font-size: 25px;
+    font-weight: 500;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .incomeDiv{
@@ -44,7 +47,7 @@
 
 
 .transactionList{
-    border: 1px solid red;
+    /*border: 1px solid red;*/
     margin-top: 10px;
     padding-left: 35px;
     padding-right: 5px;
@@ -69,6 +72,8 @@
 
 .statisticComponentDiv{
     width: 100%;
-    border: 1px solid greenyellow;
-    margin-top: 30px;
+    /*border: 1px solid greenyellow;*/
+    margin-top: 40px;
+    /*margin-bottom: 50px;*/
+    padding-bottom: 20px;
 }

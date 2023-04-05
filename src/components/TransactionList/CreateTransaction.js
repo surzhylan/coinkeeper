@@ -86,8 +86,8 @@ const CreateTransaction = ({setActive, addTransaction, accountList, expenseTypeL
             </div>
             {alertMode ? <span>Fields are required</span> : ''}
             <div className={styles.createButtons}>
-                <Button size="sm" onClick={handleSubmit}>SAVE</Button>
-                <Button size="sm" onClick={handleCancel}>CANCEL</Button>
+                <Button variant="dark" size="sm" onClick={handleSubmit}>SAVE</Button>
+                <Button variant="dark" size="sm" onClick={handleCancel}>CANCEL</Button>
             </div>
         </form>
     )

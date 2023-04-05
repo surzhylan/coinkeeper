@@ -5,7 +5,7 @@ import styles from './AccountItem.module.css';
 const AccountItem = ({account, editAccount, deleteAccount, accountBalance}) => {
     const [isEditMode, setEditMode] = useState(false)
     return (
-        <div style={{border: "solid 1px blue"}} className={styles.accountItem1Div}>
+        <div /*style={{border: "solid 1px blue"}}*/ className={styles.accountItem1Div}>
             <div onClick={() => setEditMode(true)}>
                 <div className={styles.accountItem1}>
                     <div className={styles.title}>

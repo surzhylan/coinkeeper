@@ -1,6 +1,7 @@
 import {useState} from "react";
 import TransactionType from "../../../data/models/TransactionType";
 import EditTransactionModal from "./EditTransactionModal";
+import styles from '../TransactionList.module.css';
 
 const TransactionItem = ({
                              transaction,
@@ -34,18 +35,24 @@ const TransactionItem = ({
     }
 
     return (
-        <div style={{border: "solid 1px yellow"}} onClick={() => setEditMode(true)}>
-            <p>{transaction.source.title}</p>
-            <p>{transaction.destination.title}</p>
-            {getAmountDiv()}
-            {(() => {
-                if (isEditMode) return <EditTransactionModal transaction={transaction}
-                                                             deleteTransaction={deleteTransaction}
-                                                             editTransaction={editTransaction}
-                                                             sourceList={transaction.type === TransactionType.Income ? incomeSourceList : accountList}
-                                                             destinationList={transaction.type === TransactionType.Outcome ? expenseTypeList : accountList}
-                                                             setActive={setEditMode}/>
-            })()}
+        <div /*style={{border: "solid 1px yellow"}}*/ onClick={() => setEditMode(true)} className={styles.transactionDiv}>
+            <div className={styles.transactionItemDiv}>
+                <p className={styles.transactionItemTitle1}>{transaction.source.title}</p>
+                <div className={styles.transactionItemTitle2}>
+                    <p>{transaction.destination.title}</p>
+                </div>
+                {getAmountDiv()}
+            </div>
+            <div className={styles.editTransactionDiv}>
+                {(() => {
+                    if (isEditMode) return <EditTransactionModal transaction={transaction}
+                                                                deleteTransaction={deleteTransaction}
+                                                                editTransaction={editTransaction}
+                                                                sourceList={transaction.type === TransactionType.Income ? incomeSourceList : accountList}
+                                                                destinationList={transaction.type === TransactionType.Outcome ? expenseTypeList : accountList}
+                                                                setActive={setEditMode}/>
+                })()}
+            </div>
 
         </div>
     )

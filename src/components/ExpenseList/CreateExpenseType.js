@@ -1,4 +1,6 @@
 import {useState} from "react";
+import styles from './ExpenseTypeList.module.css';
+import { Button } from "react-bootstrap";
 
 const CreateExpenseType = ({setActive, createExpenseType}) => {
     const [titleInput, setTitleInput] = useState('');
@@ -25,13 +27,19 @@ const CreateExpenseType = ({setActive, createExpenseType}) => {
 
     return (
         <form>
-            <input style={titleInputStyle} type={"text"} onChange={e => setTitleInput(e.currentTarget.value)}
-                   placeholder="What for do your spend money?"/>
-            {alertMode ? <span>Required field</span> : ''}
-            <input type={"number"} onChange={e => setSpendPlan(e.currentTarget.value)}
-                   placeholder="Planning to spend per month"/>
-            <button onClick={handleSubmit}>ADD</button>
-            <button onClick={handleCancel}>CANCEL</button>
+            <div className={styles.createForm}>
+                <div className={styles.createFormInputs}>
+                    <input style={titleInputStyle} type={"text"} onChange={e => setTitleInput(e.currentTarget.value)}
+                        placeholder="What for do your spend money?"/>
+                    {alertMode ? <span>Required field</span> : ''}
+                    <input type={"number"} onChange={e => setSpendPlan(e.currentTarget.value)}
+                        placeholder="Planning to spend per month"/>
+                </div>
+                <div className={styles.createFormButtons}>
+                    <Button variant="dark" size="sm" onClick={handleSubmit}>ADD</Button>
+                    <Button variant="dark" size="sm" onClick={handleCancel}>CANCEL</Button>
+                </div>
+            </div>
         </form>
     )
 }

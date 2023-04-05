@@ -39,7 +39,7 @@ const AccountList = ({
                     </div>)
                 })}
                 <div className={styles.accountListDivButton}>
-                    <Button onClick={() => setCreateMode(true)}>Create Account</Button>
+                    <Button variant="dark" onClick={() => setCreateMode(true)}>Create Account</Button>
                 </div>
             </div>
             {(() => {

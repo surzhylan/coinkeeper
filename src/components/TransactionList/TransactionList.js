@@ -30,14 +30,17 @@ const TransactionList = ({
 
     return (
         <div className={styles.transactionList}>
-            <Button onClick={() => setCreateMode(true)}>Create Transaction</Button>
+            <div className={styles.transactionTitles}>
+                <h5>Transactions</h5>
+                <Button variant="dark" onClick={() => setCreateMode(true)}>Create Transaction</Button>
+            </div>
             {(() => {
                 if (isCreateMode === true) return <CreateTransactionModal
                     setActive={setCreateMode} incomeSourceList={incomeSourceList} accountList={accountList}
                     addTransaction={addTransaction} expenseTypeList={expenseTypeList}/>
             })()}
             {getTransactionsDays(transactions).map(d =>
-                <div key={d}>
+                <div key={d} className={styles.transactionListTitle}>
                     <h4>{parseMonthDate(d)}</h4>
                     <div>
                         {(() => {
@@ -46,13 +49,13 @@ const TransactionList = ({
                             let totalStyle = total < 0 ? {color: 'red'} : {color: 'green'}
                             return <div key={d}>
                                 <div>
-                                    {transactionList.map(t => <div key={t.id}><TransactionItem
+                                    {transactionList.map(t => <div key={t.id} className={styles.transactionMain}><TransactionItem
                                         incomeSourceList={incomeSourceList}
                                         accountList={accountList} transaction={t}
                                         editTransaction={editTransaction}
                                         deleteTransaction={deleteTransaction}
                                         expenseTypeList={expenseTypeList}/></div>)}
-                                    <div>
+                                    <div className={styles.totalTransaction}>
                                         <span>Total:</span>
                                         <div style={totalStyle}>
                                             <span>{total < 0 ? '-' : '+'}</span>
