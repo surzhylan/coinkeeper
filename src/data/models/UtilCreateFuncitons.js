@@ -95,6 +95,8 @@ export function getAccountCurrentBalance(account, transactionList) {
         if (t.type === TransactionType.Outcome && t.destination.source === account.id) return tSum - t.amount
         else return tSum
     }, 0)
+    console.log(transactionAmount)
+    console.log(account.initialBalance)
     return Number(account.initialBalance) + transactionAmount
 }
 export function isAccount(account) {
