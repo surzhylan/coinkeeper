@@ -27,8 +27,8 @@
 
 .incomeItemDiv{
     display: flex;
-    gap: 20px;
-    height: 210px;
+    gap: 10px;
+    height: 225px;
     background-color: rgba(128, 128, 128, 0.121);
 }
 

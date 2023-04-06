@@ -22,8 +22,9 @@ const ExpenseTypeItem = ({expenseType, spendAmount, editExpenseType, deleteExpen
                         <div className={styles.title}>
                             <h5>{expenseType.title}</h5>
                         </div>
-                        <div className={styles.imageItem}>
-                                {expenseType.title === 'Groceries' ? <img src="salaryicon.png"></img> : (expenseType.title === 'Transport' ? <img src="freelanceicon.png"></img> : <img src="othericon.png"></img>)}
+                        <div className={styles.imageItemExpense}>
+                                {expenseType.title === 'Groceries' ? <img src="grocery.png"></img> : (expenseType.title === 'Transport' ? <img src="transport.png"></img> : (expenseType.title === 'Shopping' ? <img src="shopping.png" className={styles.shoppingImg}></img> : 
+                                (expenseType.title === 'Entertainment' ? <img src="entertainment.png"></img> : (expenseType.title === 'Services' ? <img src="services.png"></img> : (expenseType.title === 'FinancialExpenses' ? <img src="finance.png"></img> : <img src="othericon.png"></img>)))))}
                         </div>
                         <div className={styles.amount}>
                             {expenseType.spendPlan === ''

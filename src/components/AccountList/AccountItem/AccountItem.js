@@ -12,7 +12,7 @@ const AccountItem = ({account, editAccount, deleteAccount, accountBalance}) => {
                         <h5>{account.title}</h5>
                     </div>
                     <div className={styles.imageItem}>
-                        {account.title === 'Khalyk' ? <img src="salaryicon.png"></img> : (account.title === 'Kaspi' ? <img src="freelanceicon.png"></img> : <img src="othericon.png"></img>)}
+                        {account.title === 'Khalyk' ? <img src="khalyk.png"></img> : (account.title === 'Kaspi' ? <img src="kaspi.png"></img> : <img src="wallet.png"></img>)}
                     </div>
                     <div className={styles.balance}>
                         <div className={styles.balanceTextTitle1}>
