@@ -17,7 +17,8 @@ const TransactionList = ({
     function getTransactionsByDate(date: Date) {
         return transactions.filter(t => {
             return t.date.setHours(0, 0, 0, 0) === date.setHours(0, 0, 0, 0)
-        })
+        }).sort((a, b) =>
+            (a.date.getFullYear() === b.date.getFullYear() ? a.date.getMonth() - b.date.getMonth() : a.date.getFullYear() - b.date.getFullYear()))
     }
 
     function getTotalByDate(filteredTransactions: Array) {
